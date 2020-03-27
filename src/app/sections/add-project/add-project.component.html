@@ -1,0 +1,56 @@
+
+<section class="section section-lg">
+    <div class="container">
+        <div class="row row-grid align-items-center">
+            <div class="col-md-12 order-md-1">
+                <div class="pr-md-8">
+                    <div class="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5">
+                        <i class="ni ni-settings-gear-65"></i>
+                    </div>
+                    <h3>Adauga proiect</h3>
+                    <p>Completeaza toata campurile .Un membru DSU va revizui proiectul si il va aproba.</p>
+                    <ul class="list-unstyled mt-5">
+                        <li class="py-4">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <div class="badge badge-circle badge-success mr-3">
+                                        <i class="ni ni-settings-gear-65"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input class="form-control" placeholder="Titlul proiectului" type="text" (focus)="focus=true" (blur)="focus=false">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="py-4">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <div class="badge badge-circle badge-success mr-3">
+                                        <i class="ni ni-html5"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <textarea class="form-control" placeholder="Scurta descriere a proiectului" type="text" (focus)="focus=true" (blur)="focus=false"></textarea>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="py-2">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <div class="badge badge-circle badge-success mr-3">
+                                        <i class="ni ni-satisfied"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Descriere : </h6>
+                                    <app-tinymce-editor (emitDescription)="onTextChanged($event)" [content]="group.get('content').value?group.get('content').value:'<p></p>'"></app-tinymce-editor>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
