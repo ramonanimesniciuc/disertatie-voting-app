@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   private group: FormGroup;
   ngOnInit() {
     this.cookieService.deleteAll();
+    console.log(this.cookieService);
     this.group = this.formBuilder.group({
       username: new FormControl('', Validators.required),
       password: new FormControl('' , Validators.required)
@@ -33,6 +34,10 @@ export class LoginComponent implements OnInit {
             console.log(success);
             this.cookieService.set('token', success.token);
             this.cookieService.set('userLogged', success._id);
+            if (success.isDsu === true) {
+                this.cookieService.set('isDSU', 'true');
+            }
+            console.log(this.cookieService.get('isDSU'));
             this.router.navigate(['/proiecte']);
           }
       );

@@ -10,6 +10,8 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import {ProjectPageComponent} from './sections/project-page/project-page.component';
 import {AddProjectComponent} from './sections/add-project/add-project.component';
+import {BackofficeComponent} from './sections/backoffice/backoffice.component';
+import {StatisticsComponent} from './sections/statistics/statistics.component';
 
 const routes: Routes = [
     { path: 'home',             component: HomeComponent },
@@ -23,6 +25,16 @@ const routes: Routes = [
     {
         path: 'adauga-proiect',
         component: AddProjectComponent
+    },
+    {
+        path: 'backoffice',
+        component: BackofficeComponent,
+        children: [
+            {
+                path: 'statistici',
+                component: StatisticsComponent
+            }
+        ]
     },
     { path: 'login',          component: LoginComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }

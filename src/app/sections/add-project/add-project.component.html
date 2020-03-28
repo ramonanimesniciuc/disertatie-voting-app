@@ -1,40 +1,54 @@
 
-<section class="section section-lg">
-    <div class="container">
+<section class="section section-lg  ">
+    <div class="container section-shaped  shape shape-style-1 shape-default">
         <div class="row row-grid align-items-center">
             <div class="col-md-12 order-md-1">
                 <div class="pr-md-8">
-                    <div class="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5">
+                    <div class="icon icon-lg icon-shape  shadow rounded-circle mb-5">
                         <i class="ni ni-settings-gear-65"></i>
                     </div>
                     <h3>Adauga proiect</h3>
                     <p>Completeaza toata campurile .Un membru DSU va revizui proiectul si il va aproba.</p>
                     <ul class="list-unstyled mt-5">
-                        <li class="py-4">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <div class="badge badge-circle badge-success mr-3">
-                                        <i class="ni ni-settings-gear-65"></i>
+                        <form [formGroup]="group">
+                            <li class="py-4">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="badge badge-circle badge-success mr-3">
+                                            <i class="ni ni-settings-gear-65"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <input class="form-control" formControlName="title" placeholder="Titlul proiectului" type="text" (focus)="focus=true" (blur)="focus=false">
                                     </div>
                                 </div>
-                                <div>
-                                    <input class="form-control" placeholder="Titlul proiectului" type="text" (focus)="focus=true" (blur)="focus=false">
-                                </div>
-                            </div>
-                        </li>
-                        <li class="py-4">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <div class="badge badge-circle badge-success mr-3">
-                                        <i class="ni ni-html5"></i>
+                            </li>
+                            <li class="py-4">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="badge badge-circle badge-success mr-3">
+                                            <i class="ni ni-html5"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <textarea class="form-control" formControlName="shortDescription" placeholder="Scurta descriere a proiectului" type="text" (focus)="focus=true" (blur)="focus=false"></textarea>
                                     </div>
                                 </div>
-                                <div>
-                                    <textarea class="form-control" placeholder="Scurta descriere a proiectului" type="text" (focus)="focus=true" (blur)="focus=false"></textarea>
+                            </li>
+                            <li class="py-2">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="badge badge-circle badge-success mr-3">
+                                            <i class="ni ni-ruler-pencil"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">Descriere : </h6>
+                                        <app-tinymce-editor (emitDescription)="onTextChanged($event)" [content]="group.get('content').value?group.get('content').value:'<p></p>'"></app-tinymce-editor>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="py-2">
+                            </li>
+                            <li class="py-2">
                             <div class="d-flex align-items-center">
                                 <div>
                                     <div class="badge badge-circle badge-success mr-3">
@@ -42,12 +56,40 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h6 class="mb-0">Descriere : </h6>
-                                    <app-tinymce-editor (emitDescription)="onTextChanged($event)" [content]="group.get('content').value?group.get('content').value:'<p></p>'"></app-tinymce-editor>
+                                    <h6 class="mb-0">Va puteti implica activ in proiect? : </h6>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input class="custom-control-input" id="customCheck2" type="checkbox" formControlName="activeInvolvement">
+                                        <label class="custom-control-label" for="customCheck2">
+                                            <span>Da,ma pot implica activ</span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </li>
+                            <li class="py-2">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="badge badge-circle badge-success mr-3">
+                                            <i class="ni ni-satisfied"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">Din ce categorie face parte proiectul propus? </h6>
+                                        <div class="form-group">
+                                            <label for="categorySelect">Example select</label>
+                                            <select formControlName="CategoryId" class="form-control" id="categorySelect">
+                                               <option [value]="category.id" *ngFor="let category of categories">{{category.title}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </form>
                     </ul>
+                    <button class="btn btn-icon btn-3 btn-outline-secondary" (click)="addProject()" [disabled]="!group.valid" type="button">
+                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+                        <span class="btn-inner--text">Submit</span>
+                    </button>
                 </div>
             </div>
         </div>

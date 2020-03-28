@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NouisliderModule } from 'ng2-nouislider';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { RouterModule } from '@angular/router';
@@ -28,6 +28,10 @@ import { ProjectPageComponent } from './project-page/project-page.component';
 import { AddProjectComponent } from './add-project/add-project.component';
 import {AppModule} from '../app.module';
 import {SharedModule} from '../shared/shared.module';
+import { BackofficeComponent } from './backoffice/backoffice.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { AddNewsComponent } from './add-news/add-news.component';
+import { ManagementComponent } from './management/management.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import {SharedModule} from '../shared/shared.module';
     MostVotedProjectComponent,
     ProjectListComponent,
     ProjectPageComponent,
-    AddProjectComponent
+    AddProjectComponent,
+    BackofficeComponent,
+    StatisticsComponent,
+    AddNewsComponent,
+    ManagementComponent
   ],
   entryComponents: [NgbdModalContent],
     imports: [
@@ -59,6 +67,7 @@ import {SharedModule} from '../shared/shared.module';
         HttpClientModule,
         SharedModule,
         JwBootstrapSwitchNg2Module,
+        ReactiveFormsModule,
     ],
     exports: [SectionsComponent, ProjectListComponent],
   providers:[ProjectsService, HttpService , HttpClient]

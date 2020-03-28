@@ -4,3 +4,23 @@
 .form-control{
     font-size: 2rem;
 }
+.form-control{
+    font-size: 2rem;
+}
+
+#categorySelect{
+    font-size: 1.3rem;
+}
+button{
+    font-weight: bold;
+    font-size: 20px;
+}
+section{
+    background: linear-gradient(150deg, #bcaacc 15%, #b2d7f9 70%, #4f76ab 94%);
+}
+.mb-0{
+    font-size: 20px;
+}
+.custom-control-label{
+    font-size: 18px;
+}

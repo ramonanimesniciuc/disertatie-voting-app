@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 import {ProjectsService} from '../../services/projects.service';
 
@@ -18,12 +18,14 @@ export class AddProjectComponent implements OnInit {
 
   ngOnInit() {
     this.group = this.formBuilder.group({
-      title: new FormControl(''),
-      CategoryId: new FormControl(''),
-      content: new FormControl(''),
+      title: new FormControl('', Validators.required),
+      CategoryId: new FormControl('', Validators.required),
+      content: new FormControl('', Validators.required),
       // tslint:disable-next-line:radix
       UserId: new FormControl(parseInt(this.cookieService.get('userLogged'))),
       createdAt: new FormControl(new Date()),
+      shortDescription: new FormControl('', Validators.required),
+      activeInvolvement: new FormControl(false, Validators.required),
       votes: new FormControl(0)
     });
     this.getCategories();
@@ -47,15 +49,18 @@ export class AddProjectComponent implements OnInit {
     );
   }
 
-  onTextChanged($event){
+  onTextChanged($event) {
     this.group.get('content').setValue($event);
   }
 
   addProject() {
+    console.log(this.group.value);
     this.group.get('createdAt').setValue(new Date());
     this.projectsService.addProject(this.group.value).subscribe(
         (success) => {
           console.log(success.data);
+          this.group.get('content').setValue('');
+          this.content = '';
           this.group.reset();
         }
     );
