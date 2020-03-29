@@ -41,4 +41,8 @@ export class ProjectsService {
   checkVote(projectId: any, userId: any) {
     return this.http.get('check-vote/' + projectId + '/' + userId);
   }
+
+  getMostVoted(){
+    return this.http.get('mostvoted');
+  }
 }

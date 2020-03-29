@@ -1,1 +1,35 @@
-<p>management works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-12">
+            <!-- Tabs with icons -->
+            <div class="mb-3">
+                <middle class="text-uppercase font-weight-bold">Management</middle>
+            </div>
+            <ngb-tabset [justify]="'center'" class="custom-tab-content flex-column flex-md-row" type="pills">
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <i class="ni ni-check-bold mr-2"></i> Aproba proiecte
+                    </ng-template>
+                    <ng-template ngbTabContent class="col-lg-12 col-md-12">
+                        <app-approve-project></app-approve-project>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <i class="ni ni-ungroup mr-2"></i> Utilizatori
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                <app-users></app-users>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <i class="ni ni-calendar-grid-58 mr-2"></i> Messages
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <p class="description">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+</div>

@@ -32,6 +32,9 @@ import { BackofficeComponent } from './backoffice/backoffice.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { AddNewsComponent } from './add-news/add-news.component';
 import { ManagementComponent } from './management/management.component';
+import { UsersComponent } from './management/users/users.component';
+import { ApproveProjectComponent } from './management/approve-project/approve-project.component';
+import { HistoryComponent } from './management/history/history.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { ManagementComponent } from './management/management.component';
     BackofficeComponent,
     StatisticsComponent,
     AddNewsComponent,
-    ManagementComponent
+    ManagementComponent,
+    UsersComponent,
+    ApproveProjectComponent,
+    HistoryComponent
   ],
   entryComponents: [NgbdModalContent],
     imports: [

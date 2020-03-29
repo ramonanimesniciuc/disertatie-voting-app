@@ -12,6 +12,8 @@ import {ProjectPageComponent} from './sections/project-page/project-page.compone
 import {AddProjectComponent} from './sections/add-project/add-project.component';
 import {BackofficeComponent} from './sections/backoffice/backoffice.component';
 import {StatisticsComponent} from './sections/statistics/statistics.component';
+import {ManagementComponent} from './sections/management/management.component';
+import {AddNewsComponent} from './sections/add-news/add-news.component';
 
 const routes: Routes = [
     { path: 'home',             component: HomeComponent },
@@ -33,7 +35,9 @@ const routes: Routes = [
             {
                 path: 'statistici',
                 component: StatisticsComponent
-            }
+            },
+            {path: 'management', component: ManagementComponent},
+            {path: 'adauga-stire', component: AddNewsComponent}
         ]
     },
     { path: 'login',          component: LoginComponent },

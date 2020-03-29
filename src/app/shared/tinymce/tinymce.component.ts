@@ -9,7 +9,7 @@ export class TinymceEditorComponent implements OnInit {
   public description: any;
   @Input('content')content: any;
   @Output('emitDescription')emitDescription = new EventEmitter();
-  @ViewChild('editor',{static: false})editor: any;
+  @ViewChild('editor', {static: false})editor: any;
   public tinymceInit: any;
   constructor() { }
 
@@ -19,19 +19,21 @@ export class TinymceEditorComponent implements OnInit {
       plugins : [
         'advlist autolink lists link image charmap print preview hr anchor pagebreak',
         'searchreplace wordcount visualblocks visualchars code fullscreen',
-        'insertdatetime media nonbreaking save table contextmenu directionality',
-        'emoticons template paste textcolor colorpicker textpattern imagetools'
+        'insertdatetime media nonbreaking save table  directionality',
+        'emoticons template paste autoresize  textpattern imagetools'
       ],
       toolbar : 'fontsizeselect formatselect | bold italic strikethrough forecolor backcolor| link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat |image|table',
       fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
       image_advtab : true,
+      min_height: 500,
+      min_width: 370,
       content_css: '../../assets/tinymce/content.css',
       // tslint:disable-next-line:only-arrow-functions
       init_instance_callback(editor) {
+        editor.execCommand('mceAutoResize');
         if (content) {
           editor.setContent(content);
         }
-
       },
       // tslint:disable-next-line:only-arrow-functions
       file_picker_callback(cb, value, meta) {
@@ -58,7 +60,7 @@ export class TinymceEditorComponent implements OnInit {
       }
     };
   }
-  onInputChanged(){
+  onInputChanged() {
     this.emitDescription.emit(this.description);
   }
 }

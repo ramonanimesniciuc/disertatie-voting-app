@@ -1,1 +1,40 @@
-<p>add-news works!</p>
+
+
+<section>
+    <div class="container">
+        <div class="row py-3 align-items-center">
+            <div class="col-sm-9">
+                <h1 class="mb-0">Adauga stire</h1>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12">
+            <form class="example-form" [formGroup]="formGroup">
+                <div class="row">
+                    <mat-form-field class="form-group" >
+                        <input matInput placeholder="Insereaza titlu" formControlName="title" type="text" class="form-control" >
+                    </mat-form-field>
+                </div>
+                <br>
+                    <div class="row">
+                        <p class="display-4">Adauga o descriere:</p>
+                    </div>
+                <br>
+                <div class="row">
+                        <app-tinymce-editor (emitDescription)="onTextChanged($event)" [content]="formGroup.get('description').value?formGroup.get('description').value:'<p></p>'"></app-tinymce-editor>
+                    </div>
+                <div >
+                    <br>
+                    <!--      <button  type="button" class="btn btn-primary" (click)="addProject()">Submit</button>-->
+                    <div class="row">
+                        <div class="wrap">
+                            <button class="btn btn-icon btn-2 btn-primary"  (click)="addNews()" type="button">
+                                <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Submit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>

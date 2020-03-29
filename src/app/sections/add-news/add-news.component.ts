@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {CookieService} from 'ngx-cookie-service';
+import {BackofficeService} from '../../services/backoffice.service';
 
 @Component({
   selector: 'app-add-news',
@@ -6,10 +9,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-news.component.css']
 })
 export class AddNewsComponent implements OnInit {
+  private formGroup: FormGroup;
+  constructor(private formBuilder: FormBuilder,
+              private cookieService: CookieService,
+              private backofficeService: BackofficeService) { }
 
-  constructor() { }
+  ngOnInit() {
+    this.formGroup = this.formBuilder.group({
+      title: new FormControl(''),
+      description: new FormControl(''),
+      createdAt: new FormControl(new Date()),
+      addedBy: new FormControl(this.cookieService.get('userLogged'))
+    });
 
-  ngOnInit(): void {
+  }
+  public onReady( editor ) {
+    editor.ui.getEditableElement().parentElement.insertBefore(
+        editor.ui.view.toolbar.element,
+        editor.ui.getEditableElement()
+    );
+  }
+
+  addNews() {
+    console.log(this.formGroup.value);
+    this.backofficeService.addNews(this.formGroup.value).subscribe(
+        (success) => {
+          console.log(success);
+          this.formGroup.reset();
+        },
+        (err) => {
+          console.log(err);
+        }
+    );
+  }
+
+  onTextChanged($event){
+    this.formGroup.get('description').setValue($event);
   }
 
 }

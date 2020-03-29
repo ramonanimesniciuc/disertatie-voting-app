@@ -1,7 +1,7 @@
 <section>
     <div class="container">
-        <div class="col-lg-12 col-md-12">
-            <h2 class="display-3">Proiectul cu cele mai multe voturi : ....</h2>
+        <div class="col-lg-12 col-md-12 mostVotedDiv floating">
+            <h2 class="display-1 align-middle" *ngIf="mostVotedProject">Proiectul cu cele mai multe voturi : <span class="display-2">{{mostVotedProject.title}} cu {{mostVotedProject.votes}} voturi</span></h2>
         </div>
     </div>
 </section>
