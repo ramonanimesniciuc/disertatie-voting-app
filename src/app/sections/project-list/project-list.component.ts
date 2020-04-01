@@ -32,4 +32,6 @@ export class ProjectListComponent implements OnInit {
     this.router.navigate(['proiecte/' +  project.id]);
   }
 
+
+
 }

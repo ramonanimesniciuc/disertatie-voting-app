@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ProjectsService} from '../services/projects.service';
 
 @Component({
     selector: 'app-landing',
@@ -9,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 export class LandingComponent implements OnInit {
   focus: any;
   focus1: any;
+    public numbers:any;
+  constructor(private projectsService: ProjectsService) { }
 
-  constructor() { }
+  ngOnInit() {
+      this.getRecentNumbers();
+  }
 
-  ngOnInit() {}
+    private getRecentNumbers() {
+        this.projectsService.getRecentNumbers().subscribe(
+            (numbers) => {
+                this.numbers = numbers;
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+    }
 
 }

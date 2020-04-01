@@ -88,7 +88,7 @@
   </section>
 <app-project-list></app-project-list>
 
-  <section class="section section-lg">
+  <section *ngIf="numbers" class="section section-lg">
     <div class="container">
       <div class="row justify-content-center text-center mb-lg">
         <div class="col-lg-8">
@@ -102,7 +102,7 @@
             <div class="pt-4 text-center">
               <h5 class="title">
                 <span class="d-block mb-1">Rapunsuri DSU</span>
-                <small class="h6 text-muted">56</small>
+                <small class="h6 text-muted">{{numbers.commentsNo}}</small>
               </h5>
 
             </div>
@@ -114,7 +114,7 @@
             <div class="pt-4 text-center">
               <h5 class="title">
                 <span class="d-block mb-1">Voturi</span>
-                <small class="h6 text-muted">1578</small>
+                <small class="h6 text-muted">{{numbers.votesNo}}</small>
               </h5>
             </div>
           </div>
@@ -125,7 +125,7 @@
             <div class="pt-4 text-center">
               <h5 class="title">
                 <span class="d-block mb-1">Proiecte inregistrate</span>
-                <small class="h6 text-muted">239</small>
+                <small class="h6 text-muted">{{numbers.projectsNo}}</small>
               </h5>
             </div>
           </div>
@@ -136,7 +136,7 @@
             <div class="pt-4 text-center">
               <h5 class="title">
                 <span class="d-block mb-1">Utilizatori Inregistrati</span>
-                <small class="h6 text-muted">2300</small>
+                <small class="h6 text-muted">{{numbers.usersNo}}</small>
               </h5>
             </div>
           </div>

@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
             console.log('success');
             console.log(success);
             this.cookieService.set('token', success.token);
+            this.cookieService.set('userName', success.user);
             this.cookieService.set('userLogged', success._id);
             if (success.isDsu === true) {
                 this.cookieService.set('isDSU', 'true');

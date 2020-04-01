@@ -14,12 +14,15 @@ import {BackofficeComponent} from './sections/backoffice/backoffice.component';
 import {StatisticsComponent} from './sections/statistics/statistics.component';
 import {ManagementComponent} from './sections/management/management.component';
 import {AddNewsComponent} from './sections/add-news/add-news.component';
+import {NewsListComponent} from './sections/news-list/news-list.component';
 
 const routes: Routes = [
     { path: 'home',             component: HomeComponent },
     { path: 'user-profile',     component: ProfileComponent },
     { path: 'register',           component: SignupComponent },
     { path: 'proiecte',          component: LandingComponent },
+    { path: 'stiri',          component: NewsListComponent },
+
     {
     path: 'proiecte/:id',
       component: ProjectPageComponent

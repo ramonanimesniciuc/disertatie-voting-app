@@ -16,11 +16,17 @@
             <div class="container py-lg-md d-flex">
                 <div class="col px-0">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <h1 class="display-3  text-white"> {{ project.title}}
                                 <span>Propus de : {{project.User.last_name}} {{project.User.first_name}}</span>
                             </h1>
-                            <p class="lead  text-white">The design system comes with four pre-built pages to help you get started faster. You can change the text and images and you're good to go.</p>
+                            <p class="lead  text-white"> {{project.shortDescription}}</p>
+                            <div *ngIf="cookieService.get('isDSU')==='true' && project && project.StatusId===1" ngbTooltip="Aproba proiectul" class="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5" (click)="approveProject(project.id)">
+                                <i class="ni ni-check-bold"></i>
+                            </div>
+                            <div *ngIf="cookieService.get('isDSU')==='true' && project && project.StatusId===1" ngbTooltip="Sterge proiectul" class="icon icon-lg icon-shape icon-shape-danger shadow rounded-circle mb-5" (click)="deleteProject(project.id)">
+                                <i class="ni ni-fat-delete"></i>
+                            </div>
                         </div>
                     </div>
                 </div>

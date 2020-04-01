@@ -19,4 +19,26 @@ export class BackofficeService {
   getUserBySearch(searchItem: string) {
     return this.httpService.get('users/' + searchItem);
   }
+
+  deleteUser(userId: number) {
+    return this.httpService.get('deleteUser/' + userId);
+  }
+  deleteProject(projectId: number) {
+    return this.httpService.get('deleteProject/' + projectId);
+  }
+
+  approveProject(projectId:number){
+    return this.httpService.get('approveProject/' + projectId);
+  }
+  getProjectsInPendding(){
+    return this.httpService.get('pendingprojects');
+  }
+
+  getCategoriesChart(){
+      return this.httpService.get('categoriesChartData');
+  }
+
+  getUsersChartByAge(){
+      return this.httpService.get('usersAgeChart');
+  }
 }

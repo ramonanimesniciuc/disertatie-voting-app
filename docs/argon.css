@@ -40,6 +40,7 @@
     --danger: #f5365c;
     --light: #adb5bd;
     --dark: #212529;
+    --vibe:gold;
     --default: #172b4d;
     --white: #fff;
     --neutral: #fff;
@@ -14152,7 +14153,10 @@ textarea[resize=horizontal] {
     color: #e8e3e3;
     background-color: rgba(255, 255, 255, .5)
 }
-
+.icon-shape-vibe {
+    color: #e8d447;
+    background-color: rgba(104, 29, 40, 0.95)
+}
 .icon-shape-neutral {
     color: #e8e3e3;
     background-color: rgba(255, 255, 255, .5)

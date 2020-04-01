@@ -35,6 +35,8 @@ import { ManagementComponent } from './management/management.component';
 import { UsersComponent } from './management/users/users.component';
 import { ApproveProjectComponent } from './management/approve-project/approve-project.component';
 import { HistoryComponent } from './management/history/history.component';
+import { NewsListComponent } from './news-list/news-list.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { HistoryComponent } from './management/history/history.component';
     ManagementComponent,
     UsersComponent,
     ApproveProjectComponent,
-    HistoryComponent
+    HistoryComponent,
+    NewsListComponent
   ],
   entryComponents: [NgbdModalContent],
     imports: [
@@ -74,6 +77,7 @@ import { HistoryComponent } from './management/history/history.component';
         SharedModule,
         JwBootstrapSwitchNg2Module,
         ReactiveFormsModule,
+        ChartsModule,
     ],
     exports: [SectionsComponent, ProjectListComponent],
   providers:[ProjectsService, HttpService , HttpClient]

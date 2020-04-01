@@ -11,6 +11,7 @@ export class UsersComponent implements OnInit {
   constructor(private backofficeService: BackofficeService) { }
   public searched: string;
   public users: any[];
+  public userDeleted = false;
   ngOnInit(): void {
   }
 
@@ -23,6 +24,19 @@ export class UsersComponent implements OnInit {
           console.log(err);
         }
     );
+  }
+
+  deleteUser(userId: number) {
+      this.backofficeService.deleteUser(userId).subscribe(
+    (success) => {
+      console.log('success delete');
+      this.userDeleted = true;
+      this.users = [];
+    },
+    (Err) => {
+      console.log(Err);
+    }
+);
   }
 
 }

@@ -1,0 +1,9 @@
+.ni-fat-delete{
+    font-size: 2.4rem;
+}
+.ni-fat-delete:hover{
+    color: red;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+

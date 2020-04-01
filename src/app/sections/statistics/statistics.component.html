@@ -1,1 +1,19 @@
-<p>statistics works!</p>
+<div class="chart-wrapper">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [colors]="lineChartColors"
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+    </canvas>
+</div>
+<div *ngIf="showAgeChart" class="chart-wrapper">
+    <canvas baseChart
+            [data]="doughnutChartData"
+            [colors]="ageChartColors"
+            [labels]="doughnutChartLabels"
+            [chartType]="doughnutChartType">
+    </canvas>
+</div>

@@ -4,7 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-
+import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LandingComponent } from './landing/landing.component';
@@ -31,6 +31,7 @@ import {SectionsModule} from './sections/sections.module';
         NgbModule,
         FormsModule,
         RouterModule,
+        ChartsModule,
         AppRoutingModule,
         HomeModule,
         SectionsModule,

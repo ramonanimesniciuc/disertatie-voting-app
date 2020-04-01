@@ -12,47 +12,48 @@ export class NavbarComponent implements OnInit {
     public isCollapsed = true;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
-
+   public userName: string;
     constructor(public location: Location,
                 public cookieService: CookieService,
                 private router: Router) {
     }
 
     ngOnInit() {
+        this.userName = this.cookieService.get('userName');
       this.router.events.subscribe((event) => {
         this.isCollapsed = true;
         if (event instanceof NavigationStart) {
-           if (event.url != this.lastPoppedUrl)
+           if (event.url != this.lastPoppedUrl) {
                this.yScrollStack.push(window.scrollY);
+           }
        } else if (event instanceof NavigationEnd) {
            if (event.url == this.lastPoppedUrl) {
                this.lastPoppedUrl = undefined;
                window.scrollTo(0, this.yScrollStack.pop());
-           } else
+           } else {
                window.scrollTo(0, 0);
+           }
        }
      });
-     this.location.subscribe((ev:PopStateEvent) => {
+     this.location.subscribe((ev: PopStateEvent) => {
          this.lastPoppedUrl = ev.url;
      });
     }
 
     isHome() {
-        var titlee = this.location.prepareExternalUrl(this.location.path());
+        let titlee = this.location.prepareExternalUrl(this.location.path());
 
-        if( titlee === '#/home' ) {
+        if ( titlee === '#/home' ) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
     isDocumentation() {
-        var titlee = this.location.prepareExternalUrl(this.location.path());
-        if( titlee === '#/documentation' ) {
+        let titlee = this.location.prepareExternalUrl(this.location.path());
+        if ( titlee === '#/documentation' ) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

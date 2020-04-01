@@ -45,4 +45,8 @@ export class ProjectsService {
   getMostVoted(){
     return this.http.get('mostvoted');
   }
+
+  getRecentNumbers(){
+    return this.http.get('recentnumbers');
+  }
 }
