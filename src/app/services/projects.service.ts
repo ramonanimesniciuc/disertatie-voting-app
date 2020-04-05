@@ -22,6 +22,10 @@ export class ProjectsService {
     return this.http.get('projects');
   }
 
+  getFilteredProjects(CategoryId:number){
+    return this.http.get('filterprojects/' + CategoryId);
+  }
+
   getProjectsByCategory(categoryId: any) {
     return this.http.get('projects/category/' + categoryId);
   }
@@ -48,5 +52,9 @@ export class ProjectsService {
 
   getRecentNumbers(){
     return this.http.get('recentnumbers');
+  }
+
+  getUserOfProject(userId:number){
+    return this.http.get('projectUser/' + userId);
   }
 }

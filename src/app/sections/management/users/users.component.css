@@ -7,3 +7,11 @@
     cursor: pointer;
 }
 
+.ni-badge{
+    font-size: 2.4rem;
+}
+.ni-badge:hover{
+    color: #1f14ea;
+    font-size: 2.5rem;
+    cursor: pointer;
+}

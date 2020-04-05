@@ -41,4 +41,7 @@ export class BackofficeService {
   getUsersChartByAge(){
       return this.httpService.get('usersAgeChart');
   }
+  updateUserRole(userID:number){
+    return this.httpService.get('updateUserToAdmin/' + userID);
+  }
 }

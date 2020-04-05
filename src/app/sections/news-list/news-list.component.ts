@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FakeNewsService} from '../../services/fake-news.service';
 
 @Component({
   selector: 'app-news-list',
@@ -6,10 +7,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./news-list.component.css']
 })
 export class NewsListComponent implements OnInit {
-
-  constructor() { }
+  public fakenews: any[];
+  constructor(private fakeNewsService: FakeNewsService) { }
 
   ngOnInit(): void {
+    this.getFakeNews();
+  }
+
+  getFakeNews() {
+this.fakeNewsService.getNews().subscribe(
+    (news) => {
+      this.fakenews = news.data;
+    },
+    (err) => {
+      console.log(err);
+    }
+);
+  }
+
+  goToReadNews(newsId: number){
+
   }
 
 }

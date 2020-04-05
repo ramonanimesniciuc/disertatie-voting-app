@@ -1,1 +1,54 @@
-<p>news-list works!</p>
+<main>
+    <div class="position-relative">
+        <!-- shape Hero -->
+        <section class="section section-lg section-shaped pb-250">
+            <div class="shape shape-style-3 shape-default">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="container py-lg-md d-flex">
+                <div class="col px-0">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h1 class="display-3  text-white">Stiri
+                                <span>Verifica aici adevarul si doar stirile aprobate de DSU.</span>
+                            </h1>
+                            <p class="lead  text-white">Pentru a combate valul de stiri false raspandite am decis sa te informam noi primii.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SVG separator -->
+            <div class="separator separator-bottom separator-skew">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+        </section>
+        <!-- 1st Hero Variation -->
+    </div>
+<section class="section section-lg" *ngFor="let news of fakenews">
+    <div class="container">
+        <div class="row row-grid align-items-center">
+            <div class="col-md-6 order-md-2">
+                <img src="./assets/img/theme/promo-2.png" class="img-fluid floating">
+            </div>
+            <div class="col-md-6 order-md-1">
+                <div class="pr-md-5">
+<!--                    <div class="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5" (click)="goToReadNews(news)">-->
+<!--                        <i class="ni ni-settings-gear-65"></i>-->
+<!--                    </div>-->
+                    <h3>{{news.title}}</h3>
+                    <div [innerHTML]="news.description"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

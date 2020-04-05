@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Renderer2, ElementRef, ViewChild, HostListener } from '@angular/core';
+import {Component, OnInit, Inject, Renderer2, ElementRef, ViewChild, HostListener, NgZone} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
@@ -18,7 +18,13 @@ var navbarHeight = 0;
 export class AppComponent implements OnInit {
     private _router: Subscription;
 
-    constructor( private renderer : Renderer2, private router: Router, @Inject(DOCUMENT,) private document: any, private element : ElementRef, public location: Location) {}
+    constructor( private renderer : Renderer2,
+                 private router: Router,
+                 @Inject(DOCUMENT,)
+                 private document: any,
+                 private element : ElementRef,
+                 public location: Location,
+                 private zone: NgZone) {}
     @HostListener('window:scroll', ['$event'])
     hasScrolled() {
 
@@ -72,5 +78,8 @@ export class AppComponent implements OnInit {
           });
       });
       this.hasScrolled();
+      this.zone.run(()=>{
+
+      });
     }
 }

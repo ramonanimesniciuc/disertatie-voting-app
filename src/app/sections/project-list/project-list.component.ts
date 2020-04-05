@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProjectsService} from '../../services/projects.service';
 import {Router} from '@angular/router';
 
@@ -11,9 +11,10 @@ export class ProjectListComponent implements OnInit {
 
   constructor(private projectService: ProjectsService,
               private router: Router) { }
-  public projects: any[];
+  // public projects: any[];
+  @Input('projects')projects:any[];
   ngOnInit(): void {
-    this.getProjects();
+    // this.getProjects();
   }
 
   private getProjects() {

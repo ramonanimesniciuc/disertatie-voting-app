@@ -10,7 +10,7 @@ export class UsersComponent implements OnInit {
 
   constructor(private backofficeService: BackofficeService) { }
   public searched: string;
-  public users: any[];
+  public user: any;
   public userDeleted = false;
   ngOnInit(): void {
   }
@@ -18,7 +18,8 @@ export class UsersComponent implements OnInit {
   searchUser() {
     this.backofficeService.getUserBySearch(this.searched).subscribe(
         (user) => {
-          this.users = user.data;
+          this.user = user.data;
+          this.user.roles=user.roles;
         },
         (err) => {
           console.log(err);
@@ -31,12 +32,23 @@ export class UsersComponent implements OnInit {
     (success) => {
       console.log('success delete');
       this.userDeleted = true;
-      this.users = [];
+      this.user = {};
     },
     (Err) => {
       console.log(Err);
     }
 );
+  }
+
+  updateRole(userId:number){
+      this.backofficeService.updateUserRole(userId).subscribe(
+          (success)=>{
+              console.log(success);
+          },
+          (err)=>{
+              console.log(err);
+          }
+      );
   }
 
 }

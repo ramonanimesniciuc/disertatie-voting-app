@@ -14,7 +14,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 import {SectionsModule} from './sections/sections.module';
-
+import {SimpleNotificationsModule} from 'angular2-notifications';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import {SectionsModule} from './sections/sections.module';
         LoginComponent,
     ],
     imports: [
+        BrowserAnimationsModule,
         BrowserModule,
         NgbModule,
         FormsModule,
@@ -35,7 +37,8 @@ import {SectionsModule} from './sections/sections.module';
         AppRoutingModule,
         HomeModule,
         SectionsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SimpleNotificationsModule.forRoot()
     ],
     providers: [],
     exports: [

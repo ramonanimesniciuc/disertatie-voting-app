@@ -47,12 +47,13 @@
                   </div>
                   <h6 class="text-primary text-uppercase">Categoriile de proiecte</h6>
                   <div>
-                    <span class="badge badge-pill badge-primary">SMURD</span>
-                    <span class="badge badge-pill badge-primary">AMBULANTE</span>
-                    <span class="badge badge-pill badge-primary">SPITALE</span>
-                    <span class="badge badge-pill badge-primary">GHID DE URGENTE</span>
-                    <span class="badge badge-pill badge-primary">CATASTROFE NATURALE</span>
-                    <span class="badge badge-pill badge-primary">ALTELE</span>
+<!--                    <span class="badge badge-pill badge-primary">SMURD</span>-->
+<!--                    <span class="badge badge-pill badge-primary">AMBULANTE</span>-->
+<!--                    <span class="badge badge-pill badge-primary">SPITALE</span>-->
+<!--                    <span class="badge badge-pill badge-primary">GHID DE URGENTE</span>-->
+<!--                    <span class="badge badge-pill badge-primary">CATASTROFE NATURALE</span>-->
+<!--                    <span class="badge badge-pill badge-primary">ALTELE</span>-->
+                    <span class="badge badge-pill badge-primary" (click)="getFilteredProject(category.id)" *ngFor="let category of categories">{{category.title}}</span>
                   </div>
                 </div>
               </div>
@@ -86,7 +87,7 @@
       </div>
     </div>
   </section>
-<app-project-list></app-project-list>
+<app-project-list [projects]="projects"></app-project-list>
 
   <section *ngIf="numbers" class="section section-lg">
     <div class="container">

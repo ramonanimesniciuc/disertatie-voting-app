@@ -10,7 +10,7 @@
         </div>
     </div>
 <!--    <button class="btn btn-1 btn-outline-info" type="button" (keyup.enter)="searchUser()">Search</button>-->
-    <div class="col-lg-12 col-sm-12" *ngIf=" users && users.length>0">
+    <div class="col-lg-12 col-sm-12" *ngIf=" user">
         <table class="table">
             <thead>
             <tr>
@@ -21,11 +21,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let user of users">
+            <tr>
                 <th>{{user.last_name}}</th>
                 <th>{{user.first_name}}</th>
                 <th>{{user.username}}</th>
-                <th> <i  ngbTooltip="Sterge userul" (click)="deleteUser(user.id)" class="ni ni-fat-delete icon-lg mr-2"></i></th>
+                <th> <i  ngbTooltip="Sterge userul" (click)="deleteUser(user.id)" class="ni ni-fat-delete icon-lg mr-2"></i>
+                    <i *ngIf="user.roles && user.roles[0]!=='ROLE_ADMIN'" ngbTooltip="Rol admin" (click)="updateRole(user.id)" class="ni ni-badge icon-lg mr-2"></i>
+                </th>
             </tr>
             </tbody>
         </table>

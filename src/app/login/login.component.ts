@@ -3,6 +3,8 @@ import {AuthService} from '../services/auth.service';
 import {CookieService} from 'ngx-cookie-service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {NotifierService} from 'angular-notifier';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router,
               private formBuilder: FormBuilder,
+              private notificationsService: NotificationsService,
               private cookieService: CookieService) { }
   private group: FormGroup;
   ngOnInit() {
@@ -32,14 +35,19 @@ export class LoginComponent implements OnInit {
           (success) => {
             console.log('success');
             console.log(success);
-            this.cookieService.set('token', success.token);
-            this.cookieService.set('userName', success.user);
-            this.cookieService.set('userLogged', success._id);
-            if (success.isDsu === true) {
+            this.cookieService.set('token', success.accessToken);
+            this.cookieService.set('userName', success.username);
+            this.authService.username = success.username;
+            this.cookieService.set('userLogged', success.id);
+            if (success.roles[0] === 'ROLE_ADMIN') {
                 this.cookieService.set('isDSU', 'true');
             }
             console.log(this.cookieService.get('isDSU'));
+            this.notificationsService.success('Bine ai revenit,' + this.cookieService.get('userName'));
             this.router.navigate(['/proiecte']);
+          },
+          (err)=>{
+           this.notificationsService.error('Autentificare esuata!Incearca inca o data!');
           }
       );
     }

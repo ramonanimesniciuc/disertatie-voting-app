@@ -20,7 +20,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h6 class="mb-0">Categorie : {{project.Category.title}}</h6>
+                                    <h6 class="mb-0">Categorie : {{project.category.title}}</h6>
                                 </div>
                             </div>
                         </li>
@@ -32,7 +32,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h6 class="mb-0">Voturi: {{project.votes}}</h6>
+                                    <h6 class="mb-0">Voturi: {{project.votes?project.votes:0}}</h6>
                                 </div>
                             </div>
                         </li>
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h6 class="mb-0">Propus de : {{project.User.last_name}} {{project.User.first_name}}</h6>
+                                    <h6 class="mb-0">Propus de : {{project.users[0].last_name}} {{project.users[0].first_name}}</h6>
                                 </div>
                             </div>
                         </li>

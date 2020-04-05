@@ -5,3 +5,15 @@
 .ni:hover{
     color:white;
 }
+
+.display-3{
+    padding: 10px;
+    margin: 10px;
+}
+.btn-icon{
+    padding: 10px;
+    margin:10px;
+}
+editor{
+    margin: 10px!important;
+}

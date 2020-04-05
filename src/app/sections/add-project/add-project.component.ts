@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CookieService} from 'ngx-cookie-service';
 import {ProjectsService} from '../../services/projects.service';
-
+import {NotificationsService} from 'angular2-notifications';
+declare const tinymce;
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
@@ -13,20 +14,22 @@ export class AddProjectComponent implements OnInit {
   private categories: any[];
   private content: string;
   constructor(private formBuilder: FormBuilder,
+              private notificationsService: NotificationsService,
               private cookieService: CookieService,
               private projectsService: ProjectsService) { }
 
   ngOnInit() {
     this.group = this.formBuilder.group({
       title: new FormControl('', Validators.required),
-      CategoryId: new FormControl('', Validators.required),
+      categoryId: new FormControl('', Validators.required),
       content: new FormControl('', Validators.required),
       // tslint:disable-next-line:radix
-      UserId: new FormControl(parseInt(this.cookieService.get('userLogged'))),
+      userId: new FormControl(parseInt(this.cookieService.get('userLogged'))),
       createdAt: new FormControl(new Date()),
       shortDescription: new FormControl('', Validators.required),
       activeInvolvement: new FormControl(false, Validators.required),
-      votes: new FormControl(0)
+      votes: new FormControl(0),
+      statusId: new FormControl(1)
     });
     this.getCategories();
   }
@@ -60,8 +63,14 @@ export class AddProjectComponent implements OnInit {
         (success) => {
           console.log(success.data);
           this.group.get('content').setValue('');
+          tinymce.activeEditor.setContent('');
           this.content = '';
           this.group.reset();
+          this.group.get('userId').setValue(this.cookieService.get('userLogged'));
+          this.notificationsService.success('Proiect adaugat cu success');
+        },
+        (err)=>{
+            this.notificationsService.error('Eroare la adaugarea proiectului!');
         }
     );
 
