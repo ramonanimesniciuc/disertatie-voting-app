@@ -5,7 +5,7 @@ const Categories = db.categories;
 const User = db.user;
 const UsersVotes=db.user_votes;
 exports.getAllProjects = (req, res , next) => {
-   Projects.findAll({include:[{model:Categories},{model:Comments},{model:User,attributes:['last_name','first_name']}],where:{statusId:2}})
+   Projects.findAll({include:[{model:Categories},{model:Comments},{model:User}],where:{statusId:3}})
        .then((projects)=>{
            res.status(200).json({data:projects});
        })
@@ -114,7 +114,7 @@ exports.checkVote = (req,res,next)=>{
 
 exports.approveProject = (req,res,next)=>{
     const projectId=req.params.id;
-    Projects.update({statusId:2},{where:{id:projectId}})
+    Projects.update({statusId:3},{where:{id:projectId}})
         .then((success)=>{
             console.log(success);
             return res.status(200).send('Project approved!');

@@ -2,11 +2,10 @@
     color:black!important;
 }
 .form-control{
-    font-size: 2rem;
+    font-size: 1rem;
+    width: 61.5vw;
 }
-.form-control{
-    font-size: 2rem;
-}
+
 
 #categorySelect{
     font-size: 1.3rem;

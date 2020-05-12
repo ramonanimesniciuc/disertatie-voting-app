@@ -1,0 +1,40 @@
+section{
+    background: url("../../../assets/img/brand/reward-logo.png");
+    opacity: 0.8;
+}
+.reward-logo{
+    width: 11%;
+}
+h1,h2{
+    color:white;
+    -webkit-text-stroke: 1px #0d2b3e;
+    font-weight: bolder;
+}
+.rewards{
+    color:white;
+    font-size:20px;
+    -webkit-text-stroke: 1px #e3e3e3;
+}
+.taken-rewards{
+    color: #ffffff;
+    font-size: 20px;
+    background: #0d2b3e;
+}
+.points{
+    font-family: "Candara Light";
+    -webkit-text-stroke: 1px #073b5e;
+}
+.buy-reward{
+    width: 10%;
+
+}
+
+.buy-reward:hover{
+    opacity: 90%;
+    width: 11%;
+    cursor:pointer;
+}
+.card{
+    margin: 10px;
+}
+

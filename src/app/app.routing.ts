@@ -15,6 +15,8 @@ import {StatisticsComponent} from './sections/statistics/statistics.component';
 import {ManagementComponent} from './sections/management/management.component';
 import {AddNewsComponent} from './sections/add-news/add-news.component';
 import {NewsListComponent} from './sections/news-list/news-list.component';
+import {RewardsComponent} from './sections/rewards/rewards.component';
+import {AddVoucherComponent} from "./sections/add-voucher/add-voucher.component";
 
 const routes: Routes = [
     { path: 'home',             component: HomeComponent },
@@ -40,10 +42,12 @@ const routes: Routes = [
                 component: StatisticsComponent
             },
             {path: 'management', component: ManagementComponent},
-            {path: 'adauga-stire', component: AddNewsComponent}
+            {path: 'adauga-stire', component: AddNewsComponent},
+            {path: 'adauga-voucher', component: AddVoucherComponent }
         ]
     },
     { path: 'login',          component: LoginComponent },
+    {path: 'recompense', component: RewardsComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

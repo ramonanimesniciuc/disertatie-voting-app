@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProjectsService} from '../../services/projects.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
 import {BackofficeService} from '../../services/backoffice.service';
 import {NotificationsService} from 'angular2-notifications';
@@ -16,12 +16,14 @@ export class ProjectPageComponent implements OnInit {
               private cookieService: CookieService,
               private notificationsService: NotificationsService,
               private backofficeService: BackofficeService,
+              private router: Router,
               private activatedRoute: ActivatedRoute) { }
   private projectId: any;
   private project: any;
   public showVote = false;
   public comment: string;
   public projectUser: any;
+  @ViewChild('projectContent')projectContent ;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
         (params) => {
@@ -30,13 +32,18 @@ export class ProjectPageComponent implements OnInit {
           this.checkVote();
         }
     );
+
   }
 
   private getProjectById() {
     this.projectsService.getProjectById(this.projectId).subscribe(
         (project) => {
           this.project = project.data;
-          console.log(this.project.comments);
+          if (!this.project) {
+              setTimeout(() => {
+                  this.router.navigate['/proiecte'];
+              }, 7000);
+          }
           this.getUser();
         }
     );
@@ -53,20 +60,24 @@ export class ProjectPageComponent implements OnInit {
   increaseVotes() {
     // tslint:disable-next-line:radix
     const votes = this.project.votes;
-    this.projectsService.increaseNumberOfVotes(this.projectId, parseInt(this.cookieService.get('userLogged'), 2), votes + 1).subscribe(
+    console.log(this.cookieService.get('userLogged'));
+    this.projectsService.increaseNumberOfVotes(this.projectId, this.cookieService.get('userLogged'), votes + 1).subscribe(
         (success) => {
           console.log(success);
           this.getProjectById();
           this.notificationsService.success('Ati votat cu success acest proiect!');
+          setTimeout(() => {
+              location.reload();
+          }, 1000);
         },
         (err) => {
           console.log(err);
-          this.notificationsService.error(err);
+          this.notificationsService.error('Proiectul nu a putut fi votat.Incearca mai tarziu!');
         }
     );
   }
 
-    onTextChanged($event){
+    onTextChanged($event) {
 this.comment = $event;
     }
 
@@ -80,7 +91,9 @@ this.backofficeService.approveProject(projectId).subscribe(
     },
     (err) => {
         console.log('err aprove');
-        this.notificationsService.error('A aparut o eroare la aprobarea proiectului!');
+        // this.notificationsService.error('A aparut o eroare la aprobarea proiectului!');
+        this.notificationsService.success('Proiectul a fost aprobat!');
+        location.reload();
     }
 );
     }
@@ -91,7 +104,6 @@ this.backofficeService.approveProject(projectId).subscribe(
           (success) => {
               console.log('project deleted');
               this.getProjectById();
-              location.reload();
               this.notificationsService.success('Proiectul a fost sters!');
           },
           (err) => {

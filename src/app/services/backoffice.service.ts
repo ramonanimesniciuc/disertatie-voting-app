@@ -44,4 +44,8 @@ export class BackofficeService {
   updateUserRole(userID:number){
     return this.httpService.get('updateUserToAdmin/' + userID);
   }
+
+  getCommnetsToday(){
+    return this.httpService.get('commentsToday');
+  }
 }

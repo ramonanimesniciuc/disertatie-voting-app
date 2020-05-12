@@ -20,7 +20,7 @@
               <h1 class="display-3  text-white">Proiecte propuse
                 <span>Voteaza-le pe cele care te inspira</span>
               </h1>
-              <p class="lead  text-white">The design system comes with four pre-built pages to help you get started faster. You can change the text and images and you're good to go.</p>
+              <p class="lead  text-white">Hai si tu daca ai o idee care crezi ca ne-ar putea ajuta !</p>
             </div>
           </div>
         </div>
@@ -54,6 +54,7 @@
 <!--                    <span class="badge badge-pill badge-primary">CATASTROFE NATURALE</span>-->
 <!--                    <span class="badge badge-pill badge-primary">ALTELE</span>-->
                     <span class="badge badge-pill badge-primary" (click)="getFilteredProject(category.id)" *ngFor="let category of categories">{{category.title}}</span>
+                    <span class="badge badge-pill badge-primary" (click)="getProjects()">TOATE</span>
                   </div>
                 </div>
               </div>

@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
                 len:[3,40]
             }
         },
+        points:{
+          type: Sequelize.INTEGER
+        },
         username:{
             type:Sequelize.STRING,
             allowNull:false,

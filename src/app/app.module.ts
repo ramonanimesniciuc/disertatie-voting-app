@@ -42,6 +42,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ],
     providers: [],
     exports: [
+        NavbarComponent
     ],
     bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FakeNewsService} from '../../services/fake-news.service';
+import {NewsService} from '../../services/news.service';
 
 @Component({
   selector: 'app-news-list',
@@ -8,7 +8,7 @@ import {FakeNewsService} from '../../services/fake-news.service';
 })
 export class NewsListComponent implements OnInit {
   public fakenews: any[];
-  constructor(private fakeNewsService: FakeNewsService) { }
+  constructor(private fakeNewsService: NewsService) { }
 
   ngOnInit(): void {
     this.getFakeNews();

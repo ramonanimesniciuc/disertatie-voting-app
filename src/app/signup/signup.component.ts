@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
             birthdate: new FormControl(),
             createdAt: new FormControl(new Date()),
             phone: new FormControl(),
-            roles:new FormControl(['admin'])
+            roles:new FormControl(['user'])
         });
 
     }
@@ -36,6 +36,7 @@ export class SignupComponent implements OnInit {
         this.authService.register(this.formGroup.value).subscribe(
             (success) => {
                 console.log(success);
+                this.formGroup.reset();
             },
             (err) => {
                 console.log(err);

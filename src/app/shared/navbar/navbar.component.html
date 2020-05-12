@@ -56,7 +56,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link no-caret"  [routerLink]="['/stiri']" data-toggle="dropdown" role="button">
             <i class="ni ni-collection d-lg-none"></i>
-            <span class="nav-link-inner--text">Fake news</span>
+            <span class="nav-link-inner--text">Noutati</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret"  [routerLink]="['/recompense']" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text">Recompense</span>
           </a>
         </li>
         <li class="nav-item dropdown" *ngIf="cookieService.get('userLogged') && cookieService.get('isDSU')==='true'">

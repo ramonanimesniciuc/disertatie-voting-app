@@ -37,16 +37,17 @@ export class LoginComponent implements OnInit {
             console.log(success);
             this.cookieService.set('token', success.accessToken);
             this.cookieService.set('userName', success.username);
+            this.cookieService.set('userPoints', success.points);
             this.authService.username = success.username;
             this.cookieService.set('userLogged', success.id);
             if (success.roles[0] === 'ROLE_ADMIN') {
                 this.cookieService.set('isDSU', 'true');
             }
             console.log(this.cookieService.get('isDSU'));
-            this.notificationsService.success('Bine ai revenit,' + this.cookieService.get('userName'));
+            this.notificationsService.success('Bine ai revenit,' + this.cookieService.get('userName'), '', {timeOut: 1500});
             this.router.navigate(['/proiecte']);
           },
-          (err)=>{
+          (err) => {
            this.notificationsService.error('Autentificare esuata!Incearca inca o data!');
           }
       );

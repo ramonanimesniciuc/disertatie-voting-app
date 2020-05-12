@@ -38,7 +38,7 @@ export class ProjectsService {
     return this.http.post('projects', project);
   }
 
-  increaseNumberOfVotes(projectId: number, userId: number , Novotes: any) {
+  increaseNumberOfVotes(projectId: number, userId: any , Novotes: any) {
     return this.http.post('projects/' + projectId + '/votes', {UserId: userId, votes: Novotes});
   }
 

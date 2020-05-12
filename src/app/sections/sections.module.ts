@@ -37,6 +37,8 @@ import { ApproveProjectComponent } from './management/approve-project/approve-pr
 import { HistoryComponent } from './management/history/history.component';
 import { NewsListComponent } from './news-list/news-list.component';
 import {ChartsModule} from 'ng2-charts';
+import { RewardsComponent } from './rewards/rewards.component';
+import { AddVoucherComponent } from './add-voucher/add-voucher.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import {ChartsModule} from 'ng2-charts';
     UsersComponent,
     ApproveProjectComponent,
     HistoryComponent,
-    NewsListComponent
+    NewsListComponent,
+    RewardsComponent,
+    AddVoucherComponent
   ],
   entryComponents: [NgbdModalContent],
     imports: [

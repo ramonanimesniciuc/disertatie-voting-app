@@ -33,6 +33,8 @@ db.comments = require("../models/comment.model")(sequelize, Sequelize);
 db.news= require("../models/news.model")(sequelize, Sequelize);
 db.user_votes=require("../models/uservotes")(sequelize, Sequelize);
 db.user_roles =require("../models/userrole.model")(sequelize, Sequelize);
+db.rewards_user= require("../models/rewarduser.model")(sequelize, Sequelize);
+db.rewards = require("../models/reward.model")(sequelize, Sequelize);
 db.role.belongsToMany(db.user, {
     through: "user_roles",
     foreignKey: "roleId",
@@ -43,7 +45,16 @@ db.user.belongsToMany(db.role, {
     foreignKey: "userId",
     otherKey: "roleId"
 });
-
+db.rewards.belongsToMany(db.user, {
+    through: "rewards_user",
+    foreignKey: "rewardId",
+    otherKey: "userId"
+});
+db.user.belongsToMany(db.rewards, {
+    through: "rewards_user",
+    foreignKey: "userId",
+    otherKey: "rewardId"
+});
 db.project.belongsToMany(db.user, {
     through: "user_votes",
     foreignKey: "projectId",

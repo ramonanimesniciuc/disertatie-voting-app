@@ -51,6 +51,7 @@ require('./routes/project.routes')(app);
 require('./routes/categories.routes')(app);
 require('./routes/backoffice.routes')(app);
 require('./routes/news.routes')(app);
+require('./routes/rewards.routes')(app);
 
 // set port, listen for requests
 const PORT = 3030;

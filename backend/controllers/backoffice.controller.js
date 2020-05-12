@@ -1,8 +1,11 @@
 const db = require("../models");
+const sequelize = require('sequelize');
 const Categories = db.categories;
 const Projects = db.project;
 const User = db.user;
 const UserRole = db.user_role;
+const Comment = db.comments;
+const Rewards = db.rewards;
 const Sequelize =require('sequelize');
 exports.categoriesChartData = (req,res,next)=>{
     let data={
@@ -89,6 +92,21 @@ exports.deleteUser = (req,res,next)=>{
         .then((success)=>{
             res.status(200).json({message:'Utilizatorul a fost sters!'})
         })
+}
+
+exports.getCommentsNoToday = (req,res,next)=>{
+    const today= new Date();
+    console.log(today);
+    Comment.findAll({ where: sequelize.where( sequelize.fn('date', sequelize.col('createdAt')), '<', today)}).then((comments)=>{
+   res.status(200).json({comments:comments});
+
+})
+}
+
+exports.addReward = (req,res,next)=>{
+Rewards.create(req.body).then((succes)=>{
+    res.status(201).json({message:'Recompense adaugata cu success!'});
+}).catch((err)=>next(err));
 }
 
 
