@@ -48,4 +48,8 @@ export class BackofficeService {
   getCommnetsToday(){
     return this.httpService.get('commentsToday');
   }
+
+  getRewardData(){
+    return this.httpService.get('rewardsData');
+  }
 }

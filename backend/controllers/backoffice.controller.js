@@ -6,6 +6,7 @@ const User = db.user;
 const UserRole = db.user_role;
 const Comment = db.comments;
 const Rewards = db.rewards;
+const RewardsUsers =  db.rewards_user;
 const Sequelize =require('sequelize');
 exports.categoriesChartData = (req,res,next)=>{
     let data={
@@ -107,6 +108,39 @@ exports.addReward = (req,res,next)=>{
 Rewards.create(req.body).then((succes)=>{
     res.status(201).json({message:'Recompense adaugata cu success!'});
 }).catch((err)=>next(err));
+}
+
+exports.rewardsData = (req,res,next)=>{
+    let users = [];
+    let reward = [];
+    let totalPoints = 0;
+    RewardsUsers.findAll().then((rewards)=>{
+        for(let i=0;i< rewards.length ;i++) {
+            if (users[rewards[i].userId]) {
+                users[rewards[i].userId]++;
+            } else {
+                users[rewards[i].userId] = 1;
+            }
+            if (reward[rewards[i].rewardId]) {
+                reward[rewards[i].rewardId]++;
+            } else {
+                reward[rewards[i].rewardId] = 1;
+            }
+            Rewards.findOne({where:{id:rewards[i].rewardId}}).then((r)=>{
+                totalPoints +=r.points;
+            })
+        }
+        users = Array.from(users, item => item || 0);
+        reward = Array.from(reward, x => x ||0);
+        console.log(users.indexOf(Math.max(...users)));
+        console.log(reward);
+        User.findOne({where:{id:users.indexOf(Math.max(...users))}}).then((user)=>{
+            Rewards.findOne({where:{id:reward.indexOf(Math.max(...reward))}}).then((re)=>{
+                res.status(200).json({user:user.last_name + ' ' + user.first_name,reward:re.title,totalPointsSpent:totalPoints});
+            })
+        })
+
+    })
 }
 
 

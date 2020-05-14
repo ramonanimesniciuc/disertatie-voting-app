@@ -16,4 +16,5 @@ module.exports = function(app) {
     app.get("/deleteUser/:id",controller.deleteUser,[authJwt.verifyToken, authJwt.isAdmin])
     app.get("/commentsToday",controller.getCommentsNoToday,[authJwt.verifyToken,authJwt.isAdmin])
     app.post("/rewards",controller.addReward,[authJwt.verifyToken,authJwt.isAdmin])
+    app.get("/rewardsData",controller.rewardsData,authJwt.verifyToken)
 };

@@ -17,3 +17,11 @@
             [chartType]="doughnutChartType">
     </canvas>
 </div>
+<div class="card justify-content-center" *ngIf="rewardsData">
+    <div class="card-header">
+        <h4 class="card-header-pills"><span class="ni ni-bold-up"></span>Utilizatorul cu cele mai multe vouchere cumparate: {{rewardsData.user}}</h4>
+        <h4 class="card-header-pills"><span class="ni ni-basket"></span>Voucherul cel mai achizionat: {{rewardsData.reward}}</h4>
+        <h4 class="card-header-pills"><span class="ni ni-active-40"></span>Puncte consumate : {{rewardsData.totalPointsSpent}}</h4>
+    </div>
+
+</div>

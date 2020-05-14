@@ -12,6 +12,7 @@ export class StatisticsComponent implements OnInit {
 
   constructor(private backOfficeService: BackofficeService) { }
   public showAgeChart: boolean;
+  public rewardsData: any;
   barChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -39,12 +40,13 @@ export class StatisticsComponent implements OnInit {
   ageChartColors: Color[] = [
     {
       borderColor: 'rgba(13,207,234,0.28)',
-      backgroundColor: ['rgba(63,35,171,0.82)', 'rgba(188,170,204,0.28)','rgba(85,51,255,0.28)']
+      backgroundColor: ['rgba(63,35,171,0.82)', 'rgba(188,170,204,0.28)', 'rgba(85,51,255,0.28)']
     },
   ];
   ngOnInit(): void {
     this.getCategoriesChart();
     this.getAgeChart();
+    this.getRewardsData();
   }
 
   getCategoriesChart() {
@@ -68,6 +70,12 @@ export class StatisticsComponent implements OnInit {
           console.log(this.doughnutChartData);
         }
     );
+  }
+
+  getRewardsData() {
+      this.backOfficeService.getRewardData().subscribe((data) => {
+       this.rewardsData = data;
+      });
   }
 
 
