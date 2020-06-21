@@ -11,16 +11,19 @@
             <form class="example-form" [formGroup]="formGroup">
                 <div class="row">
                     <mat-form-field class="form-group" >
+                        <label class="col-form-label">Titlul voucherului</label>
                         <input matInput placeholder="Insereaza titlu" formControlName="title" type="text" class="form-control" >
                     </mat-form-field>
                 </div>
                 <div class="row">
                     <mat-form-field class="form-group" >
+                        <label class="col-form-label">Puncte necesare:</label>
                         <input matInput placeholder="Puncte necesare" formControlName="points" type="number" class="form-control" >
                     </mat-form-field>
                 </div>
                 <div class="row">
                     <mat-form-field class="form-group" >
+                        <label class="col-form-label">Data expirarii</label>
                         <input matInput placeholder="Data expirarii" formControlName="expiresAt" type="date" class="form-control" >
                     </mat-form-field>
                 </div>

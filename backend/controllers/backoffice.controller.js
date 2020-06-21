@@ -8,6 +8,16 @@ const Comment = db.comments;
 const Rewards = db.rewards;
 const RewardsUsers =  db.rewards_user;
 const Sequelize =require('sequelize');
+const nodemailer = require("nodemailer");
+let testAccount = nodemailer.createTestAccount();
+let transporter = nodemailer.createTransport({
+    host: "smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+        user: "eb07011c847aca",
+        pass: "e71a74985abe71"
+    }
+});
 exports.categoriesChartData = (req,res,next)=>{
     let data={
         categories:[],
@@ -87,12 +97,27 @@ exports.updateUserRole = (req,res,next)=>{
 }
 
 exports.deleteUser = (req,res,next)=>{
-    User.destroy({where:{
-            id:req.params.id
-        }})
-        .then((success)=>{
-            res.status(200).json({message:'Utilizatorul a fost sters!'})
+    User.findOne({where:{id:req.params.id}}).then((user)=>{
+        transporter.sendMail({
+            from: '"DSU.VOT" <dsu.vot@gov.ro>', // sender address
+            to: user.email, // list of receivers
+            subject: "Contul tau pe DSU.VOT a fost sters.", // Subject line
+            text: "Stergere cont DSU.VOT", // plain text body
+            html: "<h4>Buna ziua,</h4>\n" +
+                "<p>&nbsp;</p>\n" +
+                "<p>In urma unei evaluari contul dvs a fost sters pentru comportament neadecvat in cadrul platformei.</p>\n" +
+                "<p>&nbsp;</p>\n" +
+                "<p>Pentru orice nelamurire sau reclamatii va rugam sa ne contactati la : dsu.vot@gov.ro.</p>", // html body
+        }).then((success)=>{
+            User.destroy({where:{
+                    id:req.params.id
+                }})
+                .then((succes)=>{
+                    res.status(200).json({message:'Utilizatorul a fost sters!'})
+                })
         })
+    })
+
 }
 
 exports.getCommentsNoToday = (req,res,next)=>{

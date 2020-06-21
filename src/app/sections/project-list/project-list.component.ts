@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProjectsService} from '../../services/projects.service';
 import {Router} from '@angular/router';
+import {Project} from '../../models/project.model';
 
 @Component({
   selector: 'app-project-list',
@@ -12,7 +13,7 @@ export class ProjectListComponent implements OnInit {
   constructor(private projectService: ProjectsService,
               private router: Router) { }
   // public projects: any[];
-  @Input('projects')projects:any[];
+  @Input('projects')projects: Project[];
   ngOnInit(): void {
     // this.getProjects();
   }
@@ -20,7 +21,7 @@ export class ProjectListComponent implements OnInit {
   private getProjects() {
     this.projectService.getProjects().subscribe(
         (projects) => {
-          this.projects = projects.data;
+          this.projects = projects.data.map(x => new Project(x));
         },
         (Err) => {
           console.log(Err);

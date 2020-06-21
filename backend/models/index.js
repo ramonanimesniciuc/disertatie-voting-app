@@ -35,6 +35,9 @@ db.user_votes=require("../models/uservotes")(sequelize, Sequelize);
 db.user_roles =require("../models/userrole.model")(sequelize, Sequelize);
 db.rewards_user= require("../models/rewarduser.model")(sequelize, Sequelize);
 db.rewards = require("../models/reward.model")(sequelize, Sequelize);
+db.themes = require("../models/themes.model")(sequelize,Sequelize);
+db.sponsors = require("./sponsor.model")(sequelize,Sequelize);
+
 db.role.belongsToMany(db.user, {
     through: "user_roles",
     foreignKey: "roleId",
@@ -45,6 +48,9 @@ db.user.belongsToMany(db.role, {
     foreignKey: "userId",
     otherKey: "roleId"
 });
+
+db.sponsors.hasMany(db.themes);
+db.themes.belongsTo(db.sponsors);
 db.rewards.belongsToMany(db.user, {
     through: "rewards_user",
     foreignKey: "rewardId",
@@ -86,6 +92,6 @@ db.status.hasMany(db.project);
 db.project.belongsTo(db.status);
 
 
-db.ROLES = ["user", "admin", "moderator"];
+db.ROLES = ["user", "admin", "moderator" ,"sponsor"];
 
 module.exports = db;

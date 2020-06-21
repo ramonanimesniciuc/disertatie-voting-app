@@ -18,10 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./models");
 const Role = db.role;
 
-// db.sequelize.sync({force: true}).then(() => {
-//   console.log('Drop and Resync Db');
-//   initial();
-// })
+db.sequelize.sync({force: true}).then(() => {
+  console.log('Drop and Resync Db');
+  initial();
+})
 
 
 function initial() {
@@ -39,10 +39,15 @@ function initial() {
     id: 3,
     name: "admin"
   });
+
+  Role.create({
+    id:4,
+    name:"sponsor"
+  })
 }
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to DSU.VOT" });
 });
 
 require('./routes/auth.routes')(app);

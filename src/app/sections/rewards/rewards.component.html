@@ -36,7 +36,7 @@
                                 <span class="card-header">{{reward.title}}</span>
                                 <div class="card-body">
                                     <p class="card-text" [innerHTML]="reward.description"></p>
-                                    <div class="card-link"><img ngbTooltip="Cumpara voucher" (click)="buyVoucher(reward)" *ngIf="reward.points < userPoints" class="buy-reward" src="../../../assets/img/brand/buy-voucher.png"> </div>
+                                    <div class="card-link"><img ngbTooltip="Cumpara voucher" style="width: 5rem" (click)="buyVoucher(reward)" *ngIf="reward.points < userPoints" class="buy-reward" src="../../../assets/img/brand/buy-voucher.png"> </div>
                                     <div class="card-link" *ngIf="reward.points > userPoints">Iti lipsesc {{reward.points-userPoints}} PUNCTE</div>
                                 </div>
 

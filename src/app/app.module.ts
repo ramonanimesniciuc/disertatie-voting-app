@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import {SectionsModule} from './sections/sections.module';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SponsorsModule} from "./sponsors/sponsors.module";
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         HomeModule,
         SectionsModule,
         ReactiveFormsModule,
+        SponsorsModule,
         SimpleNotificationsModule.forRoot()
     ],
     providers: [],

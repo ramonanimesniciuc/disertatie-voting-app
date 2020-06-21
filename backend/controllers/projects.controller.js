@@ -4,6 +4,16 @@ const Comments = db.comments;
 const Categories = db.categories;
 const User = db.user;
 const UsersVotes=db.user_votes;
+const nodemailer = require("nodemailer");
+let testAccount = nodemailer.createTestAccount();
+let transporter = nodemailer.createTransport({
+    host: "smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+        user: "eb07011c847aca",
+        pass: "e71a74985abe71"
+    }
+});
 exports.getAllProjects = (req, res , next) => {
    Projects.findAll({include:[{model:Categories},{model:Comments},{model:User}],where:{statusId:3}})
        .then((projects)=>{
@@ -169,12 +179,30 @@ exports.recentNumbers = (req,res,next)=>{
 }
 
 exports.deleteProject = (req,res,next)=>{
-    Projects.destroy({where:{
-            id:req.params.id
-        }})
-        .then((success)=>{
-            res.status(200).json({message:'Proiectul a fost sters!'})
+    Projects.findOne({where:{id:req.params.id}}).then((project)=>{
+        User.findOne({where:{id:project.userId}}).then((user)=>{
+            let info = transporter.sendMail({
+                from: '"DSU.VOT" <dsu.vot@gov.ro>', // sender address
+                to: user.email, // list of receivers
+                subject: "Proiectul tau pe DSU.VOT a fost sters.", // Subject line
+                text: "Stergere proiect DSU.VOT", // plain text body
+                html: "<h4>Buna ziua,</h4>\n" +
+                    "<p>&nbsp;</p>\n" +
+                    "<p>In urma unei evaluari proiectul dvs cu titlul " + project.title + "  a fost sters pentru continerea unui limbaj neadecvat in cadrul platformei.</p>\n" +
+                    "<p>&nbsp;</p>\n" +
+                    "<p>Pentru orice nelamurire sau reclamatii va rugam sa ne contactati la : dsu.vot@gov.ro.</p>", // html body
+            }).then((sucess)=>{
+                Projects.destroy({where:{
+                        id:req.params.id
+                    }})
+                    .then((success)=>{
+                        res.status(200).json({message:'Proiectul a fost sters!'})
+                    })
+            })
+                .catch((Err)=>next(Err));
         })
+    })
+
 }
 
 

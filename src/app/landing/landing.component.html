@@ -89,7 +89,16 @@
     </div>
   </section>
 <app-project-list [projects]="projects"></app-project-list>
-
+  <div class="container py-lg-md d-flex" *ngIf="projects.length===0">
+    <div class="col px-0">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="display-3  text-black-50">Ne pare rau,nu avem proiecte in aceasta categorie.
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
   <section *ngIf="numbers" class="section section-lg">
     <div class="container">
       <div class="row justify-content-center text-center mb-lg">

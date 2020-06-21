@@ -38,3 +38,12 @@ h1,h2{
     margin: 10px;
 }
 
+:host ::ng-deep .card-text {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+:host ::ng-deep .card-text img {
+    max-width: 100%;
+}
