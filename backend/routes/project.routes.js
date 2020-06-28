@@ -27,6 +27,8 @@ module.exports = function(app) {
     app.post('/projects/:id/votes',controller.addVoteToProject);
     app.post('/comments',controller.addComment);
     app.get('/filterprojects/:id',controller.getFilteredProjects);
+    app.get('/projectsbysponsor/:id',controller.getAllProjectsBySponsor);
+    app.get('/project-approved-by-sponsor/:id',controller.approveProjectBySponsor);
     //
     // app.get(
     //     "/api/test/mod",

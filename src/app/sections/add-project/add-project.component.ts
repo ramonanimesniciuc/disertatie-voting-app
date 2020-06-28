@@ -13,6 +13,7 @@ export class AddProjectComponent implements OnInit {
   private group: FormGroup;
   private categories: any[];
   private content: string;
+  public theme: any;
   constructor(private formBuilder: FormBuilder,
               private notificationsService: NotificationsService,
               private cookieService: CookieService,
@@ -29,7 +30,8 @@ export class AddProjectComponent implements OnInit {
       shortDescription: new FormControl('', Validators.required),
       activeInvolvement: new FormControl(false, Validators.required),
       votes: new FormControl(0),
-      statusId: new FormControl(1)
+      statusId: new FormControl(1),
+        hasSponsorTheme: new FormControl(null)
     });
     this.getCategories();
   }
@@ -51,6 +53,14 @@ export class AddProjectComponent implements OnInit {
         }
     );
   }
+    onThemeSelected($event){
+      this.theme = $event;
+      this.group.get('hasSponsorTheme').setValue($event.id);
+    }
+
+    deleteTheme(){
+      this.theme = null;
+    }
 
   onTextChanged($event) {
     this.group.get('content').setValue($event);

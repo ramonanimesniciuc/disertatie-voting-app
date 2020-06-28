@@ -1,0 +1,11 @@
+.card-body{
+  margin-right: 4.5rem;
+    margin-left: 4.5rem;
+}
+.card{
+  cursor: pointer;
+}
+
+.card:hover{
+  border:2px solid darkgreen;
+}

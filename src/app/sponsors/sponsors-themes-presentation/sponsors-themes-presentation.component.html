@@ -1,0 +1,9 @@
+<ngb-carousel [showNavigationArrows]="true" showNavigationIndicators="false">
+    <ng-template *ngFor="let theme of themes" ngbSlide >
+        <div class="card" (click)="emitSelectedTheme(theme)">
+            <div class="card-header">{{theme.title}}</div>
+            <div class="card-body" [innerHTML]="theme.description"></div>
+            <div class="card-footer">{{theme.reward}}</div>
+        </div>
+    </ng-template>
+</ngb-carousel>

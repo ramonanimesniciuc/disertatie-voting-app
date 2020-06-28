@@ -24,8 +24,8 @@ module.exports = function(app) {
             verifySignUp.checkDuplicateUsernameOrEmail,
             verifySignUp.checkRolesExisted
         ],
-        controller.sponsorsignup()
+        controller.sponsorsignup
     );
     app.post("/api/auth/signin", controller.signin);
-    app.post("/api/auth/sponsorsignin", controller.sponsorsignin());
+    app.post("/api/auth/sponsorsignin", controller.sponsorsignin);
 };

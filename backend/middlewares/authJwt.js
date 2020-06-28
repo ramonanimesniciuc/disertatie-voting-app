@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
 const db = require("../models");
 const User = db.user;
-
+const Sponsor = db.sponsors;
 verifyToken = (req, res, next) => {
     let token = req.headers["x-access-token"];
     if (!token) {
@@ -54,6 +54,17 @@ isModerator = (req, res, next) => {
                 message: "Require Moderator Role!"
             });
         });
+    });
+};
+
+
+isSponsors = (req, res, next) => {
+    Sponsor.findByPk(req.userId).then(user => {
+     if(user.roleId===3){
+         return;
+     }else{
+         res.status(403).send({message:'Sponsor role required!'})
+     }
     });
 };
 

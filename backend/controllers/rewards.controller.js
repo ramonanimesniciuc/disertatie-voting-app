@@ -48,3 +48,9 @@ exports.getUserPoints = (req,res,next)=>{
         res.status(200).json({points:user.points});
     })
 }
+
+exports.getVouchersBySponsor = (req,res,next)=>{
+    Rewards.findAll({where:{sponsorId: req.params.id}}).then((rewards)=>{
+        res.status(200).json({data:rewards});
+    })
+}

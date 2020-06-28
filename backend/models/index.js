@@ -49,7 +49,10 @@ db.user.belongsToMany(db.role, {
     otherKey: "roleId"
 });
 
+db.role.hasOne(db.sponsors);
+
 db.sponsors.hasMany(db.themes);
+db.sponsors.hasMany(db.rewards);
 db.themes.belongsTo(db.sponsors);
 db.rewards.belongsToMany(db.user, {
     through: "rewards_user",

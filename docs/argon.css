@@ -4788,8 +4788,8 @@ input[type=submit].btn-block {
 }
 
 .card-body {
-    padding: 1.5rem;
-    flex: 1 1 auto
+    padding: 5.5rem;
+    flex: 1 1 auto;
 }
 
 .card-title {
@@ -4831,7 +4831,7 @@ input[type=submit].btn-block {
 .card-footer {
     padding: 1.25rem 1.5rem;
     border-top: 1px solid rgba(0, 0, 0, .05);
-    background-color: #fff
+    background-color: #77acba
 }
 
 .card-footer:last-child {

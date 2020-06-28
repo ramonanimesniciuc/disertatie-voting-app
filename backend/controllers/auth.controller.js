@@ -3,7 +3,8 @@ const config = require("../config/auth.config");
 const User = db.user;
 const Role = db.role;
 const Sponsor = db.sponsors;
-
+const Themes = db.themes;
+const Vouchers = db.rewards;
 const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
@@ -53,30 +54,37 @@ exports.sponsorsignup = (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8),
-        name: req.body.phone,
+        name: req.body.name,
         status: 'NOK',
         createdAt: req.body.createdAt,
-        updatedAt: req.body.updatedAt
+        updatedAt: req.body.updatedAt,
+        roleId: 3
     })
         .then(user => {
-            if (req.body.roles) {
-                Role.findAll({
-                    where: {
-                        name: {
-                            [Op.or]: req.body.roles
-                        }
-                    }
-                }).then(roles => {
-                    user.setRoles(roles).then(() => {
-                        res.send({ message: "User was registered successfully!" });
-                    });
-                });
-            } else {
-                // user role = 1
-                user.setRoles([1]).then(() => {
-                    res.send({ message: "User was registered successfully!" });
-                });
+
+                // sponsor  role = 3
+            if(req.body.type==='theme'){
+                Themes.create({
+                    title: req.body.theme_title,
+                    description: req.body.theme_description,
+                    reward: req.body.reward,
+                    sponsorId: user.id
+                }).then((success)=>{
+                    res.send({ message: "Sponsor was registered successfully!" });
+                })
+            }else{
+                Vouchers.create({
+                    title:req.body.theme_title,
+                    description: req.body.theme_description,
+                    points: req.body.reward,
+                    createdAt: new Date(),
+                    sponsorId: user.id
+                }).then((success)=>{
+                    res.send({ message: "Sponsor was registered successfully!" });
+                })
             }
+
+
         })
         .catch(err => {
             res.status(500).send({ message: err.message });
@@ -91,39 +99,40 @@ exports.signin = (req, res) => {
     })
         .then(user => {
             if (!user) {
-                return res.status(404).send({ message: "User Not found." });
-            }
+                this.sponsorsignin(req, res);
+            }else {
 
-            var passwordIsValid = bcrypt.compareSync(
-                req.body.password,
-                user.password
-            );
+                var passwordIsValid = bcrypt.compareSync(
+                    req.body.password,
+                    user.password
+                );
 
-            if (!passwordIsValid) {
-                return res.status(401).send({
-                    accessToken: null,
-                    message: "Invalid Password!"
-                });
-            }
-
-            var token = jwt.sign({ id: user.id }, config.secret, {
-                expiresIn: 86400 // 24 hours
-            });
-
-            var authorities = [];
-            user.getRoles().then(roles => {
-                for (let i = 0; i < roles.length; i++) {
-                    authorities.push("ROLE_" + roles[i].name.toUpperCase());
+                if (!passwordIsValid) {
+                    return res.status(401).send({
+                        accessToken: null,
+                        message: "Invalid Password!"
+                    });
                 }
-                res.status(200).send({
-                    id: user.id,
-                    username: user.username,
-                    email: user.email,
-                    roles: authorities,
-                    accessToken: token,
-                    points: user.points
+
+                var token = jwt.sign({id: user.id}, config.secret, {
+                    expiresIn: 86400 // 24 hours
                 });
-            });
+
+                var authorities = [];
+                user.getRoles().then(roles => {
+                    for (let i = 0; i < roles.length; i++) {
+                        authorities.push("ROLE_" + roles[i].name.toUpperCase());
+                    }
+                    res.status(200).send({
+                        id: user.id,
+                        username: user.username,
+                        email: user.email,
+                        roles: authorities,
+                        accessToken: token,
+                        points: user.points
+                    });
+                });
+            }
         })
         .catch(err => {
             res.status(500).send({ message: err.message });
@@ -133,7 +142,8 @@ exports.signin = (req, res) => {
 exports.sponsorsignin = (req, res) => {
     Sponsor.findOne({
         where: {
-            username: req.body.username
+            username: req.body.username,
+            status: 'OK'
         }
     })
         .then(user => {
@@ -158,17 +168,13 @@ exports.sponsorsignin = (req, res) => {
             });
 
             var authorities = [];
-            user.getRoles().then(roles => {
-                for (let i = 0; i < roles.length; i++) {
-                    authorities.push("ROLE_" + roles[i].name.toUpperCase());
-                }
-                res.status(200).send({
-                    id: user.id,
-                    username: user.username,
-                    email: user.email,
-                    roles: authorities,
-                    accessToken: token,
-                });
+            res.status(200).send({
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                roles: ['ROLE_SPONSOR'],
+                name: user.name,
+                accessToken: token,
             });
         })
         .catch(err => {

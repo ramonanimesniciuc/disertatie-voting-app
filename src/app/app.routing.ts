@@ -18,6 +18,7 @@ import {NewsListComponent} from './sections/news-list/news-list.component';
 import {RewardsComponent} from './sections/rewards/rewards.component';
 import {AddVoucherComponent} from "./sections/add-voucher/add-voucher.component";
 import {SponsorSignUpComponent} from "./sponsors/sponsor-sign-up/sponsor-sign-up.component";
+import {ThemeProjectsComponent} from './sponsors/theme-projects/theme-projects.component';
 
 const routes: Routes = [
     { path: 'home',             component: HomeComponent },
@@ -50,6 +51,7 @@ const routes: Routes = [
     { path: 'login',          component: LoginComponent },
     {path: 'recompense', component: RewardsComponent},
     {path: 'sponsor-sign-up', component: SponsorSignUpComponent},
+    {path: 'proiecte-inscrise', component: ThemeProjectsComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

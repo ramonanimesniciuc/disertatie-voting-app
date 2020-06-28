@@ -20,11 +20,15 @@ export class RewardsService {
     return this.http.post('buyVoucher', buy);
   }
 
-  public addVoucher(voucher:any){
+  public getVouchersBySponsor(sponsor: any) {
+    return this.http.get('voucher-sponsor/' + sponsor);
+  }
+
+  public addVoucher(voucher: any) {
     return this.http.post('vouchers', voucher);
   }
 
-  public getUserPoints(userId: any){
+  public getUserPoints(userId: any) {
     return this.http.get('userpoints/' + userId);
   }
 }

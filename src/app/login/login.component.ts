@@ -40,11 +40,19 @@ export class LoginComponent implements OnInit {
             this.cookieService.set('userPoints', success.points);
             this.authService.username = success.username;
             this.cookieService.set('userLogged', success.id);
+            if (success.roles[0] === 'ROLE_SPONSOR') {
+                this.cookieService.set('isSponsor', 'true');
+            }
             if (success.roles[0] === 'ROLE_ADMIN') {
                 this.cookieService.set('isDSU', 'true');
             }
             console.log(this.cookieService.get('isDSU'));
-            this.notificationsService.success('Bine ai revenit,' + this.cookieService.get('userName'), '', {timeOut: 1500});
+            if (success.roles[0] === 'ROLE_ADMIN' || success.roles[0] === 'ROLE_USER') {
+                this.notificationsService.success('Bine ai revenit,' + this.cookieService.get('userName'), '', {timeOut: 1500});
+            } else {
+                this.notificationsService.success('Bine ai revenit,' + success.name);
+            }
+
             this.router.navigate(['/proiecte']);
           },
           (err) => {

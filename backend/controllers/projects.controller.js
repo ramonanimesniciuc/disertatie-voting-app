@@ -4,6 +4,7 @@ const Comments = db.comments;
 const Categories = db.categories;
 const User = db.user;
 const UsersVotes=db.user_votes;
+const Themes = db.themes;
 const nodemailer = require("nodemailer");
 let testAccount = nodemailer.createTestAccount();
 let transporter = nodemailer.createTransport({
@@ -23,6 +24,32 @@ exports.getAllProjects = (req, res , next) => {
            next(err);
        })
 };
+
+exports.getAllProjectsBySponsor = (req,res,next)=>{
+Themes.findAll({where:{sponsorId:req.params.id}}).then((themes)=>{
+    let projectsadded = [];
+    for(let i=0;i<themes.length;i++){
+        Projects.findAll({include:[{model:Categories},{model:Comments},{model:User}],where:{statusId:3,hasSponsorTheme:themes[i].id}})
+            .then((projects)=>{
+               projectsadded.push(...projects);
+            })
+            .catch((err)=>{
+                next(err);
+            })
+
+        setTimeout(()=>{
+            res.status(200).json({data:projectsadded});
+        },1500)
+
+}})
+}
+
+exports.approveProjectBySponsor =(req,res,next)=>{
+    Projects.update({hasSponsorApproval: 'true'},{where:{id:req.params.id}}).then((succes)=>{
+        res.status(203).json({message:'Proiectul a fost aprobat!'})
+    })
+}
+
 
 exports.getFilteredProjects = (req, res , next) => {
     Projects.findAll({include:[{model:Categories},{model:Comments},{model:User,attributes:['last_name','first_name']}],where:{categoryId:req.params.id}})

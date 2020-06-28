@@ -1,1 +1,26 @@
-<p>theme-projects works!</p>
+<div class="section bg-gradient-indigo">
+
+    <div class="container">
+        <div class="container py-lg-md d-flex">
+            <div class="col px-0">
+                <div class="row">
+                    <div class="col-lg-8">
+            <h3 class="text-white-50">Proiecte inscrise la tema propusa de tine</h3>
+        </div>
+                </div>
+                <div class="row">
+                 <div class="col-lg-12" *ngFor="let project of projects">
+                 <div class="card">
+                     <div class="card-header">  {{project.title}}</div>
+                     <div class="card-body" [innerHTML]="project.content"></div>
+                     <div class="card-footer">
+                         <div class="card-link" *ngIf="project.hasSponsorApproval==='true'">Ai aprobat deja proiectul acesta!</div>
+                         <div *ngIf="project.hasSponsorApproval===''" class="card-link list-group-item-action" (click)="approveProject(project.id)" style="cursor: pointer"><i class="ni ni-app"></i> Aproba proiect</div>
+                     </div>
+                 </div>
+                 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

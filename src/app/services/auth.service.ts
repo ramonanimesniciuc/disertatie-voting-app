@@ -7,7 +7,7 @@ import {HttpService} from './http.service';
   providedIn: 'root'
 })
 export class AuthService {
-  public username:string;
+  public username: string;
   constructor(private http: HttpService) { }
 
   login(loginBody: any) {
@@ -16,6 +16,14 @@ export class AuthService {
 
   register(registerBody: any) {
     return this.http.post('api/auth/signup', registerBody);
+  }
+
+  registerSponsor(registerBody: any) {
+    return this.http.post('api/auth/sponsorsignup', registerBody);
+  }
+
+  loginSponsor(loginBody: any) {
+    return this.http.post('api/auth/sponsorsignin', loginBody);
   }
 
   getUsers() {

@@ -17,4 +17,7 @@ module.exports = function(app) {
     app.get("/commentsToday",controller.getCommentsNoToday,[authJwt.verifyToken,authJwt.isAdmin])
     app.post("/rewards",controller.addReward,[authJwt.verifyToken,authJwt.isAdmin])
     app.get("/rewardsData",controller.rewardsData,authJwt.verifyToken)
+    app.get('/newsponsors',controller.getNewSponsors,authJwt.verifyToken)
+    app.get('/sponsorswithoutapproval',controller.getSponsorsWithoutApproval,authJwt.verifyToken)
+    app.get('/approveSponsor/:id',controller.approveSponsor,authJwt.verifyToken)
 };

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {BackofficeService} from "../../services/backoffice.service";
+import {BackofficeService} from '../../services/backoffice.service';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-management',
@@ -7,19 +8,41 @@ import {BackofficeService} from "../../services/backoffice.service";
   styleUrls: ['./management.component.css']
 })
 export class ManagementComponent implements OnInit {
-  public comments:any;
-  constructor(private backofficeService: BackofficeService) { }
+  public comments: any;
+  public sponsors: any;
+  constructor(private backofficeService: BackofficeService,
+              private notificationsService: NotificationsService) { }
 
   ngOnInit(): void {
     this.getComments();
+    this.getSponsorsWithoutApproval();
 
   }
 
-  getComments(){
-    this.backofficeService.getCommnetsToday().subscribe((success)=>{
+  getComments() {
+    this.backofficeService.getCommnetsToday().subscribe((success) => {
       console.log(success);
       this.comments = success.comments;
     });
+  }
+
+  approveSponsor(sponsorId: any) {
+   this.backofficeService.approveSponsor(sponsorId).subscribe(
+       (success) => {
+         this.notificationsService.success('Sponsorul a fost aprobat cu succes!');
+       },
+       (err) => {
+         this.notificationsService.error('A aparut o eroare!Incercati inca o data', '', 3000);
+       }
+   );
+  }
+
+  getSponsorsWithoutApproval() {
+    this.backofficeService.getSponsorsWithoutApproval().subscribe(
+        (sponsors) => {
+          this.sponsors = sponsors.data;
+        }
+    );
   }
 
 }

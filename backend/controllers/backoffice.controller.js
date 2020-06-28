@@ -6,6 +6,8 @@ const User = db.user;
 const UserRole = db.user_role;
 const Comment = db.comments;
 const Rewards = db.rewards;
+const Sponsors = db.sponsors;
+const Themes = db.themes;
 const RewardsUsers =  db.rewards_user;
 const Sequelize =require('sequelize');
 const nodemailer = require("nodemailer");
@@ -18,6 +20,18 @@ let transporter = nodemailer.createTransport({
         pass: "e71a74985abe71"
     }
 });
+exports.getNewSponsors = (req,res,next)=>{
+    Sponsors.findAll({where:{status:'NOK'}}).then((sponsors)=>{
+        res.status(200).json({data:sponsors});
+    })
+}
+
+exports.approveSponsor = (req,res,next)=>{
+    Sponsors.update({status: 'OK'},{where:{id:req.params.id}}).then((sponsors)=>{
+        res.status(204).json({message: 'Sponsor aprobat!'});
+    })
+}
+
 exports.categoriesChartData = (req,res,next)=>{
     let data={
         categories:[],
@@ -83,6 +97,12 @@ exports.searchUser = (req,res,next)=>{
         })
     .catch(err=>{
         return next(err);
+    })
+}
+
+exports.getSponsorsWithoutApproval = (req,res,next)=>{
+    Sponsors.findAll({where:{status: 'NOK'},include:[{model:Rewards},{model:Themes}]}).then((sponsors)=>{
+        res.status(200).json({data: sponsors});
     })
 }
 

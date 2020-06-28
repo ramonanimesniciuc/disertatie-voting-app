@@ -15,4 +15,5 @@ module.exports = function(app) {
     app.post("/buyVoucher",controller.buyVoucher,authJwt.verifyToken);
     app.post("/vouchers",controller.addReward,authJwt.verifyToken);
     app.get("/userpoints/:id",controller.getUserPoints,authJwt.verifyToken);
+    app.get("/voucher-sponsor/:id",controller.getVouchersBySponsor,authJwt.verifyToken);
 };

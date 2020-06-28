@@ -45,11 +45,19 @@ export class BackofficeService {
     return this.httpService.get('updateUserToAdmin/' + userID);
   }
 
+  approveSponsor(sponsorId: number){
+    return this.httpService.get('approveSponsor/' + sponsorId);
+  }
+
   getCommnetsToday(){
     return this.httpService.get('commentsToday');
   }
 
   getRewardData(){
     return this.httpService.get('rewardsData');
+  }
+
+  getSponsorsWithoutApproval(){
+    return this.httpService.get('sponsorswithoutapproval');
   }
 }

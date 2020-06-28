@@ -12,6 +12,7 @@ export class RewardsComponent implements OnInit {
   public rewardsAvailable: any[];
   public rewardsByUser: any[];
   public userPoints: any;
+  public sponsorsVouchers: any[];
   constructor(private rewardsService: RewardsService,
               public cookieService: CookieService,
               private notificationsService: NotificationsService) { }
@@ -19,8 +20,13 @@ export class RewardsComponent implements OnInit {
   ngOnInit(): void {
       this.userPoints = 0;
     this.getRewards();
-    this.getRewardsByUser();
-    this.getPoints();
+
+    if(this.cookieService.get('isSponsor')){
+        this.getVouchersBySponsor();
+    }else{
+        this.getRewardsByUser();
+        this.getPoints();
+    }
   }
 
   getRewards() {
@@ -32,6 +38,14 @@ export class RewardsComponent implements OnInit {
           this.notificationsService.error('Eroare la aducerea de vouchere!', '', {timeOut: 1500});
         }
     );
+  }
+
+  getVouchersBySponsor() {
+      this.rewardsService.getVouchersBySponsor(this.cookieService.get('userLogged')).subscribe(
+          (vouchers) => {
+              this.sponsorsVouchers = vouchers.data;
+          }
+      );
   }
 
   getRewardsByUser() {

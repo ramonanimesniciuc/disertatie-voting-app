@@ -1,7 +1,77 @@
-<section class="section-lg bg-gradient-info section-shaped">
+<section class="section-lg bg-gradient-cyan section-shaped">
     <div class="container">
         <h2 class="col-12 display-3">Inregistreaza-te si devino sponsor</h2>
-        <form class="col-12 col-md-12 col-sm-12 col-xl-12" [formGroup]="">
+        <form class="col-12 col-md-12 col-sm-12 col-xl-12" [formGroup]="signUpForm">
+            <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-briefcase-24"></i></span>
+                    </div>
+                    <input class="form-control"  formControlName="name" placeholder="Nume" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control"  formControlName="email" placeholder="Email" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-paper-diploma"></i></span>
+                    </div>
+                    <input class="form-control"  formControlName="username" placeholder="Username" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input class="form-control"  formControlName="password" placeholder="password" type="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-alternative mb-3" style="padding: 10px">
+                    <div class="input-group-prepend">In vederea inregistrarii esti nevoit sa adaugi un plan de proiect in care sa ne spui ce aplicatii te-ar interesa in vederea sponsorizarii sau ce fel de voucher poti sa oferi drept recompensa pentru utilizatorii care se implica in cadrul platformei.
+                        </div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-badge"></i>Ce doresti sa adaugi? </span>
+                    </div>
+                   <label class="col-form-label" style="padding: 10px">Tema de proiecte</label> <input (change)="changeThemeSelection($event)"  [checked]="isTheme"  class="form-control" type="checkbox">
+
+                    <label class="col-form-label" style="padding: 10px">Voucher</label><input class="form-control" [checked]="isVoucher" (change)="changeVoucherSelection($event)" type="checkbox">
+
+                </div>
+            </div>
+            <h3 class="col-12 display-4" *ngIf="isTheme" ><i class="fa fa-paperclip"></i> Adauga si o descriere a temei pe care doresti sa o propui</h3>
+            <h3 class="col-12 display-4" *ngIf="isVoucher" ><i class="fa fa-paperclip"></i> Adauga si o descriere a voucherului pe care doresti sa-l propui</h3>
+            <div class="form-group" *ngIf="isVoucher || isTheme">
+                <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-settings"></i></span>
+                    </div>
+                    <input class="form-control"  formControlName="theme_title" placeholder="Titlul" type="text">
+                </div>
+            </div>
+            <div class="row" *ngIf="isVoucher || isTheme">
+                <app-tinymce-editor (emitDescription)="onTextChanged($event)" [content]="signUpForm.get('theme_description').value"></app-tinymce-editor>
+            </div>
+            <div class="form-group" *ngIf="isVoucher || isTheme">
+                <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-badge"></i></span>
+                    </div>
+                    <input class="form-control"  formControlName="reward" [placeholder]="isTheme?'Suma oferita spre sponsorizare in EUR':'Numarul de puncte pe necesare pentru achizionarea voucherului'" type="text">
+                </div>
+                <ul *ngIf="isVoucher"><li>1000 puncte = proiectul propus de utilizator este ales</li><li>100 puncte = fiecare proiect adaugat si aprobat </li><li> 10 puncte = fiecare proiect votat si iesit castigator</li></ul>
+            </div>
+            <div class="text-center">
+                <button type="button" (click)="registerSponsor()" class="btn btn-primary mt-4" [disabled]="!signUpForm.valid">Creeaza cont</button>
+            </div>
         </form>
     </div>
 

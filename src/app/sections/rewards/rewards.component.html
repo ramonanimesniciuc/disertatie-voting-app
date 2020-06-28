@@ -6,12 +6,12 @@
                     <h1 class="mb-0"><img class="reward-logo" src="../../../assets/img/brand/reward.png"> Recompense</h1>
                 </div>
             </div>
-            <div class="row py-3 align-items-center">
+            <div class="row py-3 align-items-center" *ngIf="cookieService.get('userLogged') && !cookieService.get('isSponsor')">
                 <div class="col-sm-9">
                     <h2 class="mb-0">Dispui de <span class="points">{{userPoints}}</span> de puncte .</h2>
                 </div>
             </div>
-            <div class="row py-3 align-items-center">
+            <div class="row py-3 align-items-center" *ngIf="cookieService.get('userLogged') && !cookieService.get('isSponsor')">
                 <div class="col-sm-9">
                     <h2 class="mb-0">Recompense deja achizionate:</h2>
 
@@ -27,6 +27,24 @@
                     </div>
                 </div>
             </div>
+            <div class="row py-3 align-items-center" *ngIf="cookieService.get('isSponsor')">
+                <div class="col-sm-9">
+                    <h2 class="mb-0">Vouchere adaugate de tine:</h2>
+                    <div class="row" *ngFor="let reward of sponsorsVouchers">
+                        <div class="col s12 m6">
+                            <div class="card  blue-grey darken-1">
+                                <span class="card-header">{{reward.title}}</span>
+                                <div class="card-body">
+                                    <p class="card-text" [innerHTML]="reward.description"></p>
+                                    <div class="card-link" *ngIf="cookieService.get('userLogged')"><img ngbTooltip="Cumpara voucher" style="width: 5rem" (click)="buyVoucher(reward)" *ngIf="reward.points < userPoints" class="buy-reward" src="../../../assets/img/brand/buy-voucher.png"> </div>
+                                    <div class="card-link" *ngIf="reward.points > userPoints && cookieService.get('userLogged')">Iti lipsesc {{reward.points-userPoints}} PUNCTE</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row py-3 align-items-center">
                 <div class="col-sm-9">
                     <h2 class="mb-0">Alte vouchere:</h2>
@@ -36,8 +54,8 @@
                                 <span class="card-header">{{reward.title}}</span>
                                 <div class="card-body">
                                     <p class="card-text" [innerHTML]="reward.description"></p>
-                                    <div class="card-link"><img ngbTooltip="Cumpara voucher" style="width: 5rem" (click)="buyVoucher(reward)" *ngIf="reward.points < userPoints" class="buy-reward" src="../../../assets/img/brand/buy-voucher.png"> </div>
-                                    <div class="card-link" *ngIf="reward.points > userPoints">Iti lipsesc {{reward.points-userPoints}} PUNCTE</div>
+                                    <div class="card-link" *ngIf="cookieService.get('userLogged')"><img ngbTooltip="Cumpara voucher" style="width: 5rem" (click)="buyVoucher(reward)" *ngIf="reward.points < userPoints" class="buy-reward" src="../../../assets/img/brand/buy-voucher.png"> </div>
+                                    <div class="card-link" *ngIf="reward.points > userPoints && cookieService.get('userLogged')">Iti lipsesc {{reward.points-userPoints}} PUNCTE</div>
                                 </div>
 
                             </div>

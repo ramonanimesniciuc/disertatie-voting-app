@@ -24,6 +24,12 @@ module.exports = (sequelize, Sequelize) => {
         createdAt:{
             type:Sequelize.DATE
         },
+        hasSponsorTheme:{
+            type: Sequelize.INTEGER
+        },
+        hasSponsorApproval:{
+            type: Sequelize.STRING
+        }
     });
     return Project;
 };

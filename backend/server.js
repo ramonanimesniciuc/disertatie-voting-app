@@ -18,10 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./models");
 const Role = db.role;
 
-db.sequelize.sync({force: true}).then(() => {
-  console.log('Drop and Resync Db');
-  initial();
-})
+// db.sequelize.sync({force: true}).then(() => {
+//   console.log('Drop and Resync Db');
+//   initial();
+// })
 
 
 function initial() {
@@ -57,6 +57,7 @@ require('./routes/categories.routes')(app);
 require('./routes/backoffice.routes')(app);
 require('./routes/news.routes')(app);
 require('./routes/rewards.routes')(app);
+require('./routes/sponsors.routes')(app);
 
 // set port, listen for requests
 const PORT = 3030;

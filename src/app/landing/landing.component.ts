@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProjectsService} from '../services/projects.service';
 import {Project} from "../models/project.model";
 import {Category} from "../models/category.model";
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-landing',
@@ -15,12 +16,14 @@ export class LandingComponent implements OnInit {
     public numbers: any;
     public projects: Project[];
     public categories: Category[];
-  constructor(private projectsService: ProjectsService) { }
+  constructor(private projectsService: ProjectsService,
+              private cookieService: CookieService) { }
 
   ngOnInit() {
       this.getRecentNumbers();
       this.getProjects();
       this.getCategories();
+      console.log(this.cookieService.get('isSponsor'));
   }
 
     private getRecentNumbers() {

@@ -88,8 +88,8 @@
       </div>
     </div>
   </section>
-<app-project-list [projects]="projects"></app-project-list>
-  <div class="container py-lg-md d-flex" *ngIf="projects.length===0">
+<app-project-list *ngIf="projects" [projects]="projects"></app-project-list>
+  <div class="container py-lg-md d-flex" *ngIf="projects && projects.length===0">
     <div class="col px-0">
       <div class="row">
         <div class="col-lg-12">

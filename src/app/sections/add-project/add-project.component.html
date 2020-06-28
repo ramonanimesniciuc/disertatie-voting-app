@@ -84,6 +84,15 @@
                                     </div>
                                 </div>
                             </li>
+
+                            <li class="py-2">
+                                <h3 class="display-4 col-12">Da click pe una din temele propuse de sponsori daca vrei sa te inscri cu ideea ta la tema acestuia.</h3>
+                                <div class="form-group" style="display: flex">
+                                    <h5 *ngIf="theme">Ai selectat sa te inscrii la tema : {{theme.title}} </h5><span (click)="deleteTheme()" *ngIf="theme" style="margin-top: -5px"><i style="font-size: 2.5rem;color:red" ngbTooltip="Sterge selectia" class="ni ni-fat-delete"></i></span>
+                                </div>
+
+               <app-sponsors-themes-presentation (selectedTheme)="onThemeSelected($event)"></app-sponsors-themes-presentation>
+                            </li>
                         </form>
                     </ul>
                     <button class="btn btn-icon btn-3 btn-outline-secondary" (click)="addProject()" [disabled]="!group.valid" type="button">

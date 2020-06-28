@@ -39,6 +39,7 @@ import { NewsListComponent } from './news-list/news-list.component';
 import {ChartsModule} from 'ng2-charts';
 import { RewardsComponent } from './rewards/rewards.component';
 import { AddVoucherComponent } from './add-voucher/add-voucher.component';
+import {SponsorsModule} from '../sponsors/sponsors.module';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { AddVoucherComponent } from './add-voucher/add-voucher.component';
         JwBootstrapSwitchNg2Module,
         ReactiveFormsModule,
         ChartsModule,
+        SponsorsModule,
     ],
     exports: [SectionsComponent, ProjectListComponent],
   providers:[ProjectsService, HttpService , HttpClient]

@@ -41,7 +41,16 @@
                   <p class="description d-none d-md-inline-block mb-0">Vezi lista proiectelor adaugate.</p>
                 </div>
               </a>
-              <a *ngIf="cookieService.get('userLogged')" routerLinkActive="active" [routerLink]="['/adauga-proiect']" class="media d-flex align-items-center">
+              <a routerLinkActive="active" *ngIf="cookieService.get('isSponsor')" [routerLink]="['/proiecte-inscrise']" class="media d-flex align-items-center">
+                <div class="icon icon-shape bg-gradient-gray rounded-circle text-white">
+                  <i class="ni ni-paper-diploma"></i>
+                </div>
+                <div class="media-body ml-3">
+                  <h6 class="heading text-primary mb-md-1">Proiecte inscrise la tema ta</h6>
+                  <p class="description d-none d-md-inline-block mb-0">Vezi lista proiectelor adaugate.</p>
+                </div>
+              </a>
+              <a *ngIf="cookieService.get('userLogged') && !cookieService.get('isSponsor')" routerLinkActive="active" [routerLink]="['/adauga-proiect']" class="media d-flex align-items-center">
                 <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
                   <i class="ni ni-fat-add"></i>
                 </div>
@@ -59,7 +68,7 @@
             <span class="nav-link-inner--text">Noutati</span>
           </a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" >
           <a class="nav-link no-caret"  [routerLink]="['/recompense']" data-toggle="dropdown" role="button">
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text">Recompense</span>
