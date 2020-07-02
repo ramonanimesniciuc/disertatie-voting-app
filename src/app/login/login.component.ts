@@ -50,13 +50,13 @@ export class LoginComponent implements OnInit {
             if (success.roles[0] === 'ROLE_ADMIN' || success.roles[0] === 'ROLE_USER') {
                 this.notificationsService.success('Bine ai revenit,' + this.cookieService.get('userName'), '', {timeOut: 1500});
             } else {
-                this.notificationsService.success('Bine ai revenit,' + success.name);
+                this.notificationsService.success('Bine ai revenit,' + success.name , '', {timeOut: 1500});
             }
 
             this.router.navigate(['/proiecte']);
           },
           (err) => {
-           this.notificationsService.error('Autentificare esuata!Incearca inca o data!');
+           this.notificationsService.error('Autentificare esuata!Incearca inca o data!', '', {timeOut: 1500});
           }
       );
     }

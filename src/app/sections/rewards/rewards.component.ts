@@ -13,6 +13,7 @@ export class RewardsComponent implements OnInit {
   public rewardsByUser: any[];
   public userPoints: any;
   public sponsorsVouchers: any[];
+  public loading: boolean;
   constructor(private rewardsService: RewardsService,
               public cookieService: CookieService,
               private notificationsService: NotificationsService) { }
@@ -21,18 +22,20 @@ export class RewardsComponent implements OnInit {
       this.userPoints = 0;
     this.getRewards();
 
-    if(this.cookieService.get('isSponsor')){
+    if (this.cookieService.get('isSponsor')) {
         this.getVouchersBySponsor();
-    }else{
+    } else {
         this.getRewardsByUser();
         this.getPoints();
     }
   }
 
   getRewards() {
+      this.loading = true;
     this.rewardsService.getRewards().subscribe(
         (rewards) => {
           this.rewardsAvailable = rewards.data;
+            this.loading = false;
         },
         (err) => {
           this.notificationsService.error('Eroare la aducerea de vouchere!', '', {timeOut: 1500});
@@ -68,6 +71,7 @@ export class RewardsComponent implements OnInit {
       (success) => {
           this.notificationsService.success(success.message, '', {timeOut: 1500});
           this.getPoints();
+          this.getRewards();
       }
   );
   }

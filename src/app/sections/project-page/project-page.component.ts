@@ -65,14 +65,14 @@ export class ProjectPageComponent implements OnInit {
         (success) => {
           console.log(success);
           this.getProjectById();
-          this.notificationsService.success('Ati votat cu success acest proiect!');
+          this.notificationsService.success('Ati votat cu success acest proiect!' , '' , {timeOut: 1500});
           setTimeout(() => {
               location.reload();
           }, 1000);
         },
         (err) => {
           console.log(err);
-          this.notificationsService.error('Proiectul nu a putut fi votat.Incearca mai tarziu!');
+          this.notificationsService.error('Proiectul nu a putut fi votat.Incearca mai tarziu!', '', {timeOut: 1500});
         }
     );
   }
@@ -87,12 +87,12 @@ this.backofficeService.approveProject(projectId).subscribe(
         console.log('project approved');
         this.getProjectById();
         location.reload();
-        this.notificationsService.success('Proiectul a fost aprobat!');
+        this.notificationsService.success('Proiectul a fost aprobat!', 'Acesta va fi disponibil in pagina de proiecte', {timeOut: 3500});
     },
     (err) => {
         console.log('err aprove');
         // this.notificationsService.error('A aparut o eroare la aprobarea proiectului!');
-        this.notificationsService.success('Proiectul a fost aprobat!');
+        this.notificationsService.success('Proiectul a fost aprobat!', '', {timeOut: 1500});
         location.reload();
     }
 );
@@ -104,11 +104,11 @@ this.backofficeService.approveProject(projectId).subscribe(
           (success) => {
               console.log('project deleted');
               this.getProjectById();
-              this.notificationsService.success('Proiectul a fost sters!');
+              this.notificationsService.success('Proiectul a fost sters!',  'Acesta nu va mai putea fi accesat!' , {timeOut: 2500});
           },
           (err) => {
               console.log(err);
-              this.notificationsService.error('A aparut o eroare la stergerea proiectului!');
+              this.notificationsService.error('A aparut o eroare la stergerea proiectului!', 'Incercati mai tarziu!', {timeOut: 1500});
           }
       );
     }
@@ -125,7 +125,7 @@ this.backofficeService.approveProject(projectId).subscribe(
           console.log(success);
           this.comment = '';
             tinymce.activeEditor.setContent('');
-            this.notificationsService.success('Comentariul a fost adaugat!');
+            this.notificationsService.success('Comentariul a fost adaugat!', '', {timeOut: 1500});
             this.getProjectById();
         },
         (err) => {

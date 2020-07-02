@@ -26,7 +26,8 @@ export class SponsorSignUpComponent implements OnInit {
       theme_title: new FormControl('', Validators.required),
       theme_description : new FormControl('', Validators.required),
         reward : new FormControl('', Validators.required),
-        type: new FormControl('')
+        type: new FormControl(''),
+        codes: new FormControl('')
     }
     );
   }
@@ -43,7 +44,7 @@ export class SponsorSignUpComponent implements OnInit {
            this.isTheme = false;
            this.isVoucher = false;
            tinymce.activeEditor.setContent('');
-       this.notificationsService.success('Contul a fost creat cu success!Vei primi un email cand un reprezent DSU v-a aproba contul tau.', '', 6000);
+       this.notificationsService.success('Contul a fost creat cu success!Vei primi un email cand un reprezent DSU v-a aproba contul tau.', '', {timeOut: 5000});
        }
    );
    }

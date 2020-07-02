@@ -45,10 +45,11 @@
 <!--                    <div class="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5" (click)="goToReadNews(news)">-->
 <!--                        <i class="ni ni-settings-gear-65"></i>-->
 <!--                    </div>-->
-                    <h3>{{news.title}}</h3>
+                    <h3>{{news.title}}</h3> <button class="btn alert-link btn-outline-secondary" (click)="deleteNews(news)" *ngIf="cookieService.get('isDSU')==='true'">Sterge articolul</button>
                     <div [innerHTML]="news.description"></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+</main>

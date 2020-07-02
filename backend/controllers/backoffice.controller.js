@@ -3,7 +3,7 @@ const sequelize = require('sequelize');
 const Categories = db.categories;
 const Projects = db.project;
 const User = db.user;
-const UserRole = db.user_role;
+const UserRole = db.user_roles;
 const Comment = db.comments;
 const Rewards = db.rewards;
 const Sponsors = db.sponsors;
@@ -85,15 +85,17 @@ exports.searchUser = (req,res,next)=>{
         }
     }).then((user)=>{
         var authorities = [];
-        user.getRoles().then(roles => {
-            for (let i = 0; i < roles.length; i++) {
-                authorities.push("ROLE_" + roles[i].name.toUpperCase());
-            }
-            res.status(200).send({
-                data: user,
-                roles: authorities,
+        if(user){
+            user.getRoles().then(roles => {
+                for (let i = 0; i < roles.length; i++) {
+                    authorities.push("ROLE_" + roles[i].name.toUpperCase());
+                }
+                res.status(200).send({
+                    data: user,
+                    roles: authorities,
+                });
             });
-        });
+        }
         })
     .catch(err=>{
         return next(err);
@@ -107,6 +109,14 @@ exports.getSponsorsWithoutApproval = (req,res,next)=>{
 }
 
 exports.updateUserRole = (req,res,next)=>{
+    // UserRole.findOne({where:{userId:req.params.id}}).then((user)=>{
+    //     user.update({roled:3}).then((sucess)=>{
+    //         res.status(203).json({message:'Userul are drepturi de admin'})
+    //     })
+    //         .catch((err)=>{
+    //             res.status(500).json({message:err});
+    //         })
+    // })
     UserRole.update({roleId:3},{where:{userId:req.params.id}})
         .then(()=>{
             res.status(203).json({message:'Userul are drepturi de admin!'})

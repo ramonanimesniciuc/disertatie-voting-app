@@ -17,3 +17,12 @@ exports.addNews =  (req , res , next)=>{
         return next(err);
     })
 }
+
+exports.deleteNews = (req,res,next)=>{
+    News.destroy({where:{id:req.params.id}}).then((success)=>{
+        res.status(200).json({message:'Articol sters cu success!'})
+    })
+        .catch((err)=>{
+            res.status(500).json({message:'Eroare.Incercati din nou!'})
+        })
+}

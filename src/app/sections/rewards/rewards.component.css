@@ -47,3 +47,7 @@ h1,h2{
 :host ::ng-deep .card-text img {
     max-width: 100%;
 }
+.img-fluid{
+    margin: auto;
+    display: block;
+}

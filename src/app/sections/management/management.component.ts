@@ -29,10 +29,11 @@ export class ManagementComponent implements OnInit {
   approveSponsor(sponsorId: any) {
    this.backofficeService.approveSponsor(sponsorId).subscribe(
        (success) => {
-         this.notificationsService.success('Sponsorul a fost aprobat cu succes!');
+         this.notificationsService.success('Sponsorul a fost aprobat cu succes!', '', {timeOut: 1500});
+         this.getSponsorsWithoutApproval();
        },
        (err) => {
-         this.notificationsService.error('A aparut o eroare!Incercati inca o data', '', 3000);
+         this.notificationsService.error('A aparut o eroare!Incercati inca o data', '', {timeOut: 3000});
        }
    );
   }

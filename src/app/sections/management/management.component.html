@@ -33,6 +33,7 @@
                              <button class="btn btn-link border-left border-bottom" (click)="approveSponsor(sponsor.id)" style="cursor: pointer;color:green">Aproba sponsor</button>
                          </div>
                      </div>
+                        <div class="card" *ngIf="sponsors.length===0">Nu exista sponsori la aprobat.</div>
                     </ng-template>
                 </ngb-tab>
                 <ngb-tab>

@@ -153,8 +153,14 @@ exports.approveProject = (req,res,next)=>{
     const projectId=req.params.id;
     Projects.update({statusId:3},{where:{id:projectId}})
         .then((success)=>{
-            console.log(success);
-            return res.status(200).send('Project approved!');
+            Projects.findOne({where:{id:projectId}}).then((project)=>{
+                User.findOne({where:{id:project.userId}}).then((user)=>{
+                    const userPoints = user.points + 100;
+                    User.update({points: userPoints},{where:{id:user.id}}).then((success)=>{
+                        return res.status(200).send('Project approved!');
+                    })
+                })
+            })
         })
         .catch((err)=>{
             return next(err);

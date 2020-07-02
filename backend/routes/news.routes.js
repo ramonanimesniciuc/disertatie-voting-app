@@ -12,5 +12,6 @@ module.exports = function(app) {
 
     app.get("/news", controller.getNews);
     app.post("/news",controller.addNews,[authJwt.verifyToken,authJwt.isAdmin]);
+    app.get('/deletenews/:id',controller.deleteNews,[authJwt.verifyToken,authJwt.isAdmin])
 
 };

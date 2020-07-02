@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NewsService} from '../../services/news.service';
+import {CookieService} from 'ngx-cookie-service';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-news-list',
@@ -8,7 +10,9 @@ import {NewsService} from '../../services/news.service';
 })
 export class NewsListComponent implements OnInit {
   public fakenews: any[];
-  constructor(private fakeNewsService: NewsService) { }
+  constructor(private fakeNewsService: NewsService,
+              private notificationsService: NotificationsService,
+              public cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.getFakeNews();
@@ -25,8 +29,20 @@ this.fakeNewsService.getNews().subscribe(
 );
   }
 
-  goToReadNews(newsId: number){
+  goToReadNews(newsId: number) {
 
   }
+  deleteNews(news: any) {
+this.fakeNewsService.deleteNews(news.id).subscribe(
+    (success) => {
+      this.notificationsService.success('Ai sters articolul cu succes!', '', {timeOut: 1500});
+      this.getFakeNews();
+    },
+    (err) => {
+      this.notificationsService.error(err.message, '', {timeOut: 1500});
+    }
+);
+  }
+
 
 }

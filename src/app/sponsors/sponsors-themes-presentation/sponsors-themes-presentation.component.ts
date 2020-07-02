@@ -25,11 +25,11 @@ export class SponsorsThemesPresentationComponent implements OnInit {
           this.themes = themes.data;
         },
         (err) => {
-          this.notificationsService.error('Eroare la incarcare', 'Temele propuse de sponsori nu s-au putut incarca!', 5000);
+          this.notificationsService.error('Eroare la incarcare', 'Temele propuse de sponsori nu s-au putut incarca!', {timeOut: 5000});
         }
     );
   }
-  emitSelectedTheme(themeId: any){
+  emitSelectedTheme(themeId: any) {
     this.selectedTheme.emit(themeId);
   }
 }

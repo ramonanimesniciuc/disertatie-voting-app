@@ -53,12 +53,12 @@ export class AddProjectComponent implements OnInit {
         }
     );
   }
-    onThemeSelected($event){
+    onThemeSelected($event) {
       this.theme = $event;
       this.group.get('hasSponsorTheme').setValue($event.id);
     }
 
-    deleteTheme(){
+    deleteTheme() {
       this.theme = null;
     }
 
@@ -77,10 +77,11 @@ export class AddProjectComponent implements OnInit {
           this.content = '';
           this.group.reset();
           this.group.get('userId').setValue(this.cookieService.get('userLogged'));
-          this.notificationsService.success('Proiect adaugat cu success');
+          this.notificationsService.success('Proiect adaugat cu success', '', {timeOut: 1500});
+          this.theme = null;
         },
-        (err)=>{
-            this.notificationsService.error('Eroare la adaugarea proiectului!');
+        (err) => {
+            this.notificationsService.error('Eroare la adaugarea proiectului!', '', {timeOut: 1500});
         }
     );
 

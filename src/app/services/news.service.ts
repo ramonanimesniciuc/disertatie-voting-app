@@ -15,4 +15,8 @@ export class NewsService {
   public addNews(news: any) {
     return this.httpService.post('news', news);
   }
+
+  public deleteNews(newsId: any){
+    return this.httpService.get('deletenews/' + newsId);
+  }
 }

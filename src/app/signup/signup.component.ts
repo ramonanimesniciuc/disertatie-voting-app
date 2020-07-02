@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
-import {NotificationsService} from "angular2-notifications";
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
     selector: 'app-signup',
@@ -13,9 +13,9 @@ export class SignupComponent implements OnInit {
     focus;
     focus1;
     focus2;
-    public gdpr: boolean;
+    public gdpr = false;
     public formGroup: FormGroup;
-    public minAge : any;
+    public minAge: any;
     constructor(private formBuilder: FormBuilder,
                 private notificationsService: NotificationsService,
                 public authService: AuthService) { }
@@ -35,21 +35,21 @@ export class SignupComponent implements OnInit {
 
     }
 
-    get password(){
+    get password() {
         return this.formGroup.get('password');
     }
 
     registerUser() {
         const today = new Date();
         this.minAge = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-        if(new Date(this.formGroup.get('birthdate').value).getFullYear() > today.getFullYear() - 18){
-            this.notificationsService.error('Varsta necesara este de 18 ani!');
-        }else{
+        if (new Date(this.formGroup.get('birthdate').value).getFullYear() > today.getFullYear() - 18) {
+            this.notificationsService.error('Varsta necesara este de 18 ani!', '', {timeOut: 1500});
+        } else {
             this.authService.register(this.formGroup.value).subscribe(
                 (success) => {
                     console.log(success);
                     this.formGroup.reset();
-                    this.notificationsService.success('Te-ai inregistrat cu success!');
+                    this.notificationsService.success('Te-ai inregistrat cu success!', '', {timeOut: 1500});
                 },
                 (err) => {
                     this.notificationsService.error(err.message);

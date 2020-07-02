@@ -14,7 +14,7 @@
             <div class="row py-3 align-items-center" *ngIf="cookieService.get('userLogged') && !cookieService.get('isSponsor')">
                 <div class="col-sm-9">
                     <h2 class="mb-0">Recompense deja achizionate:</h2>
-
+                    <div class="row" *ngIf="rewardsByUser && rewardsByUser.length===0"><p class="col text-white-50 s12 m6">Nu ai achizionat momentan niciun voucher</p></div>
                     <div class="row" *ngFor="let userReward of rewardsByUser">
                         <div class="col s12 m6">
                             <div class="card blue-grey darken-1">
@@ -36,8 +36,8 @@
                                 <span class="card-header">{{reward.title}}</span>
                                 <div class="card-body">
                                     <p class="card-text" [innerHTML]="reward.description"></p>
-                                    <div class="card-link" *ngIf="cookieService.get('userLogged')"><img ngbTooltip="Cumpara voucher" style="width: 5rem" (click)="buyVoucher(reward)" *ngIf="reward.points < userPoints" class="buy-reward" src="../../../assets/img/brand/buy-voucher.png"> </div>
-                                    <div class="card-link" *ngIf="reward.points > userPoints && cookieService.get('userLogged')">Iti lipsesc {{reward.points-userPoints}} PUNCTE</div>
+                                    <div class="card-link" *ngIf="cookieService.get('userLogged')"><img ngbTooltip="Cumpara voucher" style="width: 5rem" (click)="buyVoucher(reward)" *ngIf="reward.points < userPoints" class="buy-reward" src="../../../assets/img/brand/buy-voucher.png"></div>
+                                    <div class="card-link" *ngIf="reward.points > userPoints && cookieService.get('userLogged') && !cookieService.get('isSponsor')">Iti lipsesc {{reward.points-userPoints}} PUNCTE</div>
                                 </div>
 
                             </div>
@@ -47,19 +47,21 @@
             </div>
             <div class="row py-3 align-items-center">
                 <div class="col-sm-9">
-                    <h2 class="mb-0">Alte vouchere:</h2>
+                    <h2 class="mb-0" *ngIf="!loading">Alte vouchere:</h2>
                     <div class="row" *ngFor="let reward of rewardsAvailable">
-                        <div class="col s12 m6">
+                        <div class="col s12 m6" *ngIf="!loading">
                             <div class="card  blue-grey darken-1">
                                 <span class="card-header">{{reward.title}}</span>
                                 <div class="card-body">
                                     <p class="card-text" [innerHTML]="reward.description"></p>
-                                    <div class="card-link" *ngIf="cookieService.get('userLogged')"><img ngbTooltip="Cumpara voucher" style="width: 5rem" (click)="buyVoucher(reward)" *ngIf="reward.points < userPoints" class="buy-reward" src="../../../assets/img/brand/buy-voucher.png"> </div>
-                                    <div class="card-link" *ngIf="reward.points > userPoints && cookieService.get('userLogged')">Iti lipsesc {{reward.points-userPoints}} PUNCTE</div>
+                                    <div class="card-link" *ngIf="cookieService.get('userLogged') && !cookieService.get('isSponsor')"><img ngbTooltip="Cumpara voucher" style="width: 5rem" (click)="buyVoucher(reward)" *ngIf="reward.points < userPoints" class="buy-reward" src="../../../assets/img/brand/buy-voucher.png">  {{reward.points}} puncte necesare</div>
+                                    <div class="card-link" *ngIf="reward.points > userPoints && cookieService.get('userLogged') && !cookieService.get('isSponsor')">Iti lipsesc {{reward.points-userPoints}} PUNCTE</div>
+                                    <div class="card-link">Mai sunt disponibile : {{reward.vouchersLeft}} vouchere</div>
                                 </div>
 
                             </div>
                         </div>
+                        <img *ngIf="loading" src="../../../assets/img/brand/loading.gif" class="text-justify-center img-fluid">
                     </div>
                 </div>
             </div>

@@ -55,14 +55,18 @@ db.sponsors.hasMany(db.themes);
 db.sponsors.hasMany(db.rewards);
 db.themes.belongsTo(db.sponsors);
 db.rewards.belongsToMany(db.user, {
-    through: "rewards_user",
-    foreignKey: "rewardId",
-    otherKey: "userId"
+    through: {
+        model: 'rewards_user',
+        unique: false
+    },
+    constraints: false
 });
 db.user.belongsToMany(db.rewards, {
-    through: "rewards_user",
-    foreignKey: "userId",
-    otherKey: "rewardId"
+    through: {
+        model: 'rewards_user',
+        unique: false
+    },
+    constraints: false
 });
 db.project.belongsToMany(db.user, {
     through: "user_votes",

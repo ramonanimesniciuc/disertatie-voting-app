@@ -35,6 +35,10 @@
                 <div class="row">
                     <app-tinymce-editor (emitDescription)="onTextChanged($event)" [content]="formGroup.get('description').value?formGroup.get('description').value:'<p></p>'"></app-tinymce-editor>
                 </div>
+                <div class="row">
+                    <p>Adauga codurile pentru vouchere(exemplu : ABC;123GG;111111;...)</p>
+                    <textarea class="col-12" formControlName="codes" placeholder="Adauga codurile de la vouchere separate prin ; "></textarea>
+                </div>
                 <div >
                     <br>
                     <!--      <button  type="button" class="btn btn-primary" (click)="addProject()">Submit</button>-->

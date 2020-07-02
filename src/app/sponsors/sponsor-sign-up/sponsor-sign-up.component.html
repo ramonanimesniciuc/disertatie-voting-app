@@ -67,6 +67,14 @@
                     </div>
                     <input class="form-control"  formControlName="reward" [placeholder]="isTheme?'Suma oferita spre sponsorizare in EUR':'Numarul de puncte pe necesare pentru achizionarea voucherului'" type="text">
                 </div>
+                <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-album-2"></i></span>
+                    </div>
+                    <textarea class="form-control"  formControlName="codes" placeholder="Introduceti codurile separate prin ; " type="text"></textarea>
+
+                </div>
+                <p>Exemplu : ABCD;12345;EFTR566;..</p>
                 <ul *ngIf="isVoucher"><li>1000 puncte = proiectul propus de utilizator este ales</li><li>100 puncte = fiecare proiect adaugat si aprobat </li><li> 10 puncte = fiecare proiect votat si iesit castigator</li></ul>
             </div>
             <div class="text-center">

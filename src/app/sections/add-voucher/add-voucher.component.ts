@@ -21,7 +21,8 @@ export class AddVoucherComponent implements OnInit {
       points: new FormControl(0, Validators.required),
       createdAt: new FormControl( new Date()),
       updatedAt: new FormControl( new Date()),
-      expiresAt: new FormControl(new Date())
+      expiresAt: new FormControl(new Date()),
+      codes: new FormControl('')
     });
   }
 

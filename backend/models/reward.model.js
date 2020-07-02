@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         expiresAt:{
             type: Sequelize.DATE
+        },
+        codes:{
+            type: Sequelize.STRING
         }
     });
 

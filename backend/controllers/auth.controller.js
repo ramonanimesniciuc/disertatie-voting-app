@@ -20,7 +20,8 @@ exports.signup = (req, res) => {
         last_name:req.body.last_name,
         first_name:req.body.first_name,
         birthdate: req.body.birthdate,
-        createdAt: req.body.createdAt
+        createdAt: req.body.createdAt,
+        points: 0
 
     })
         .then(user => {
@@ -78,7 +79,8 @@ exports.sponsorsignup = (req, res) => {
                     description: req.body.theme_description,
                     points: req.body.reward,
                     createdAt: new Date(),
-                    sponsorId: user.id
+                    sponsorId: user.id,
+                    codes: req.body.codes
                 }).then((success)=>{
                     res.send({ message: "Sponsor was registered successfully!" });
                 })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BackofficeService} from '../../../services/backoffice.service';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-users',
@@ -8,10 +9,12 @@ import {BackofficeService} from '../../../services/backoffice.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private backofficeService: BackofficeService) { }
+  constructor(private backofficeService: BackofficeService,
+              private notificationsService: NotificationsService) { }
   public searched: string;
   public user: any;
   public userDeleted = false;
+  public loading: boolean;
   ngOnInit(): void {
   }
 
@@ -19,7 +22,7 @@ export class UsersComponent implements OnInit {
     this.backofficeService.getUserBySearch(this.searched).subscribe(
         (user) => {
           this.user = user.data;
-          this.user.roles=user.roles;
+          this.user.roles = user.roles;
         },
         (err) => {
           console.log(err);
@@ -28,10 +31,13 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(userId: number) {
+      this.loading = true;
       this.backofficeService.deleteUser(userId).subscribe(
     (success) => {
       console.log('success delete');
       this.userDeleted = true;
+      this.loading = false;
+      this.notificationsService.success('Utilizatorul a fost sters', '', {timeOut: 1500});
       this.user = {};
     },
     (Err) => {
@@ -40,12 +46,16 @@ export class UsersComponent implements OnInit {
 );
   }
 
-  updateRole(userId:number){
+  updateRole(userId: number) {
+      this.loading = true;
       this.backofficeService.updateUserRole(userId).subscribe(
-          (success)=>{
+          (success) => {
               console.log(success);
+              this.searchUser();
+              this.loading = false;
+              this.notificationsService.success('Utilizatorul are drepturile de admin acum.', '', {timeOut: 1500});
           },
-          (err)=>{
+          (err) => {
               console.log(err);
           }
       );

@@ -104,7 +104,7 @@
                 <div class="row my-4">
                   <div class="col-12">
                     <div class="custom-control custom-control-alternative custom-checkbox">
-                      <input class="custom-control-input" id="customCheckRegister" [checked]="gdpr" type="checkbox">
+                      <input class="custom-control-input" [(ngModel)]="gdpr" [ngModelOptions]="{standalone:true}" id="customCheckRegister" [checked]="gdpr" type="checkbox">
                       <label class="custom-control-label" for="customCheckRegister">
                         <span>Sunt de acord ca datele mele sa fie preluate fara sa fie distribuite catre terti
                         </span>
@@ -113,7 +113,7 @@
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="button" (click)="registerUser()" [disabled]="!gdpr && !formGroup.valid" class="btn btn-primary mt-4">Creeaza cont</button>
+                  <button type="button" (click)="registerUser()" [disabled]="gdpr===false || !formGroup.valid"  class="btn btn-primary mt-4">Creeaza cont</button>
                 </div>
               </form>
             </div>
