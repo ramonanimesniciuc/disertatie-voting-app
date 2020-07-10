@@ -14108,6 +14108,10 @@ textarea[resize=horizontal] {
     color: #2643e9;
     background-color: rgba(138, 152, 235, .5)
 }
+.icon-shape-thought {
+    color: #1d0250;
+    background-color: rgba(236, 156, 239, 0.5)
+}
 
 .icon-shape-secondary {
     color: #cfe3f1;

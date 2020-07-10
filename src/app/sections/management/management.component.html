@@ -14,7 +14,7 @@
                 </ngb-tab>
                 <ngb-tab>
                     <ng-template ngbTabTitle>
-                        <i class="ni ni-check-bold mr-2"></i> Aproba sponsori
+                        <i class="ni ni-bold-down mr-2"></i> Aproba sponsori
                     </ng-template>
                     <ng-template ngbTabContent class="col-lg-12 col-md-12">
                      <div class="card" *ngFor="let sponsor of sponsors">
@@ -38,6 +38,13 @@
                 </ngb-tab>
                 <ngb-tab>
                     <ng-template ngbTabTitle>
+                        <i class="ni ni-ui-04 mr-2"></i> Colaborari
+                    </ng-template>
+                    <ng-template ngbTabContent class="col-lg-12 col-md-12">
+<app-collaborations-view></app-collaborations-view>                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
                         <i class="ni ni-ungroup mr-2"></i> Utilizatori
                     </ng-template>
                     <ng-template ngbTabContent>
@@ -46,7 +53,7 @@
                 </ngb-tab>
                 <ngb-tab>
                     <ng-template ngbTabTitle>
-                        <i class="ni ni-calendar-grid-58 mr-2"></i> Messages
+                        <i class="ni ni-calendar-grid-58 mr-2"></i> Comentarii
                     </ng-template>
                     <ng-template ngbTabContent>
                     <p *ngIf="comments">Ati raspuns la {{comments.length}} proiecte.</p>

@@ -11,7 +11,8 @@ import {BackofficeService} from '../../services/backoffice.service';
 export class StatisticsComponent implements OnInit {
 
   constructor(private backOfficeService: BackofficeService) { }
-  public showAgeChart: boolean;
+  public showAgeChart: boolean
+    public showCategoriesChart: boolean;
   public rewardsData: any;
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -55,6 +56,9 @@ export class StatisticsComponent implements OnInit {
           console.log(data);
           this.barChartLabels = data.categories;
           this.barChartData[0].data = data.projects;
+          console.log(this.barChartData[0]);
+            this.showCategoriesChart = true;
+
         }
     );
   }

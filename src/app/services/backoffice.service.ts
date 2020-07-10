@@ -12,8 +12,15 @@ export class BackofficeService {
     return this.httpService.post('news', news);
   }
 
+  approveCollaboration(collaboration:any){
+    return this.httpService.get('approve-collaboration/' + collaboration.id);
+  }
   getNews() {
     return this.httpService.get('news');
+  }
+
+  getCollaborations(){
+    return this.httpService.get('project-collaborations');
   }
 
   getUserBySearch(searchItem: string) {

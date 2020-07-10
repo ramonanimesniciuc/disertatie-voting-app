@@ -21,6 +21,7 @@ export class ProjectPageComponent implements OnInit {
   private projectId: any;
   private project: any;
   public showVote = false;
+  public showCollaborate = false;
   public comment: string;
   public projectUser: any;
   @ViewChild('projectContent')projectContent ;
@@ -41,6 +42,7 @@ export class ProjectPageComponent implements OnInit {
           this.project = project.data;
           if (!this.project) {
               setTimeout(() => {
+                  // tslint:disable-next-line:no-unused-expression
                   this.router.navigate['/proiecte'];
               }, 7000);
           }
@@ -53,8 +55,33 @@ export class ProjectPageComponent implements OnInit {
       this.projectsService.getUserOfProject(this.project.userId).subscribe(
           (user) => {
               this.projectUser = user.user;
+              console.log(this.projectUser);
+              console.log(this.cookieService.get('userLogged'));
+              console.log(this.cookieService.get('isDSU'));
+             this.checkCollaboration();
           }
       );
+  }
+
+  checkCollaboration() {
+  this.projectsService.checkProjectCollaboration(this.projectId, this.cookieService.get('userLogged')).subscribe(
+      (success) => {
+          if (success.checked === true && success.status) {
+              this.showCollaborate = false;
+              this.notificationsService.info('Felicitari.Esti inscris ca si colaborator!', '', {timeOut: 1500});
+          } else {
+              if (success.status) {
+                  this.notificationsService.info(success.status, '', {timeOut: 1500});
+              } else {
+                  this.showCollaborate = true;
+              }
+
+          }
+      },
+      (err) => {
+          this.notificationsService.error('Nu am putut verifica colaborarile acestui proiect!', '', {timeOut: 1500});
+      }
+  );
   }
 
   increaseVotes() {
@@ -84,13 +111,11 @@ this.comment = $event;
     approveProject(projectId: any) {
 this.backofficeService.approveProject(projectId).subscribe(
     (success) => {
-        console.log('project approved');
         this.getProjectById();
         location.reload();
         this.notificationsService.success('Proiectul a fost aprobat!', 'Acesta va fi disponibil in pagina de proiecte', {timeOut: 3500});
     },
     (err) => {
-        console.log('err aprove');
         // this.notificationsService.error('A aparut o eroare la aprobarea proiectului!');
         this.notificationsService.success('Proiectul a fost aprobat!', '', {timeOut: 1500});
         location.reload();
@@ -102,16 +127,27 @@ this.backofficeService.approveProject(projectId).subscribe(
       this.backofficeService.deleteProject(projectId).subscribe
       (
           (success) => {
-              console.log('project deleted');
               this.getProjectById();
               this.notificationsService.success('Proiectul a fost sters!',  'Acesta nu va mai putea fi accesat!' , {timeOut: 2500});
           },
           (err) => {
-              console.log(err);
               this.notificationsService.error('A aparut o eroare la stergerea proiectului!', 'Incercati mai tarziu!', {timeOut: 1500});
           }
       );
     }
+
+    collaborate(projectId: number, userId: any) {
+this.projectsService.addCollaboration(projectId, userId).subscribe(
+    (success) => {
+        this.notificationsService.info(success.message, '', {timeOut: 1500});
+        this.getProjectById();
+    },
+    (err) => {
+        this.notificationsService.error(err.message, '', {timeOut: 1500});
+    }
+);
+    }
+
 
   addComment() {
     const comment = {
@@ -122,14 +158,12 @@ this.backofficeService.approveProject(projectId).subscribe(
     };
     this.projectsService.addComment(comment).subscribe(
         (success) => {
-          console.log(success);
           this.comment = '';
             tinymce.activeEditor.setContent('');
             this.notificationsService.success('Comentariul a fost adaugat!', '', {timeOut: 1500});
             this.getProjectById();
         },
         (err) => {
-          console.log(err);
           this.notificationsService.error(err);
         }
     );

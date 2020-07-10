@@ -72,6 +72,7 @@ export class RewardsComponent implements OnInit {
           this.notificationsService.success(success.message, '', {timeOut: 1500});
           this.getPoints();
           this.getRewards();
+          this.getRewardsByUser();
       }
   );
   }

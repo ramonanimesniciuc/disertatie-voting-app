@@ -29,6 +29,8 @@ module.exports = function(app) {
     app.get('/filterprojects/:id',controller.getFilteredProjects);
     app.get('/projectsbysponsor/:id',controller.getAllProjectsBySponsor);
     app.get('/project-approved-by-sponsor/:id',controller.approveProjectBySponsor);
+    app.post('/collaborations',controller.addCollaboration,authJwt.verifyToken);
+    app.get('/collaboration/:projectId/:userId',controller.checkCollaboration,authJwt.verifyToken)
     //
     // app.get(
     //     "/api/test/mod",

@@ -20,4 +20,6 @@ module.exports = function(app) {
     app.get('/newsponsors',controller.getNewSponsors,authJwt.verifyToken)
     app.get('/sponsorswithoutapproval',controller.getSponsorsWithoutApproval,authJwt.verifyToken)
     app.get('/approveSponsor/:id',controller.approveSponsor,authJwt.verifyToken)
+    app.get('/project-collaborations',controller.getCollaborationsNotApproved,authJwt.verifyToken)
+    app.get('/approve-collaboration/:id',controller.approveCollaboration,authJwt.verifyToken)
 };

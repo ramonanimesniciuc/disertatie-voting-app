@@ -18,11 +18,19 @@ export class ProjectsService {
     return this.http.post('comments', comment);
   }
 
+  addCollaboration(projectId: number, userId: any) {
+    return this.http.post('collaborations', {projectId: projectId, userId: userId, status: 'NOK'});
+  }
+
+  checkProjectCollaboration(projectId: number, userId: any) {
+    return this.http.get('collaboration/' + projectId + '/' + userId);
+  }
+
   getProjects() {
     return this.http.get('projects');
   }
 
-  getFilteredProjects(CategoryId:number){
+  getFilteredProjects(CategoryId: number) {
     return this.http.get('filterprojects/' + CategoryId);
   }
 
@@ -46,15 +54,15 @@ export class ProjectsService {
     return this.http.get('check-vote/' + projectId + '/' + userId);
   }
 
-  getMostVoted(){
+  getMostVoted() {
     return this.http.get('mostvoted');
   }
 
-  getRecentNumbers(){
+  getRecentNumbers() {
     return this.http.get('recentnumbers');
   }
 
-  getUserOfProject(userId:number){
+  getUserOfProject(userId: number) {
     return this.http.get('projectUser/' + userId);
   }
 }

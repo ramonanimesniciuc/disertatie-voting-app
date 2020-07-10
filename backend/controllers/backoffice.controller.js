@@ -8,6 +8,7 @@ const Comment = db.comments;
 const Rewards = db.rewards;
 const Sponsors = db.sponsors;
 const Themes = db.themes;
+const Collaborations = db.collaborations;
 const RewardsUsers =  db.rewards_user;
 const Sequelize =require('sequelize');
 const nodemailer = require("nodemailer");
@@ -26,9 +27,39 @@ exports.getNewSponsors = (req,res,next)=>{
     })
 }
 
+exports.approveCollaboration = (req,res,next)=>{
+    Collaborations.update({status:'OK'},{where:{id:req.params.id}}).then((success)=>
+    {
+        res.status(203).json({message:'Success!!'})
+    })
+        .catch((err)=>res.status(501).json({message:err.message}))
+}
+exports.getCollaborationsNotApproved = (req,res,next)=>{
+    Collaborations.findAll({ where:{status:'NOK'},include:[User,Projects]}).then((collaborations)=>{
+        res.status(200).json({data:collaborations})
+    })
+}
+
 exports.approveSponsor = (req,res,next)=>{
     Sponsors.update({status: 'OK'},{where:{id:req.params.id}}).then((sponsors)=>{
-        res.status(204).json({message: 'Sponsor aprobat!'});
+        transporter.sendMail({
+            from: '"DSU.VOT" <dsu.vot@gov.ro>', // sender address
+            to: 'ramorra30@gmail.com', // list of receivers
+            subject: "Contul tau pe DSU.VOT a fost aprobat.", // Subject line
+            text: "Aprobare cont DSU.VOT", // plain text body
+            html: "<h4>Buna ziua,</h4>\n" +
+                "<p>&nbsp;</p>\n" +
+                "<p>In urma unei evaluari contul dvs a fost aprobat in cadrul platformei.</p>\n" +
+                "<p>&nbsp;</p>\n" +
+                "<p>Pentru orice nelamurire sau reclamatii va rugam sa ne contactati la : dsu.vot@gov.ro.</p>", // html body
+        }).then((success)=>{
+            res.status(204).json({message: 'Sponsor aprobat!'});
+        })
+            .catch((err)=>{
+                res.status(501).json({message:'Eroare la trimiterea emailului!'})
+            })
+
+
     })
 }
 

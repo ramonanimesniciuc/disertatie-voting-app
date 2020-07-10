@@ -5,6 +5,7 @@ const Categories = db.categories;
 const User = db.user;
 const UsersVotes=db.user_votes;
 const Themes = db.themes;
+const Collaborations = db.collaborations;
 const nodemailer = require("nodemailer");
 let testAccount = nodemailer.createTestAccount();
 let transporter = nodemailer.createTransport({
@@ -24,6 +25,27 @@ exports.getAllProjects = (req, res , next) => {
            next(err);
        })
 };
+
+exports.addCollaboration = (req,res,next)=>{
+    Collaborations.create(req.body).then((Sucess)=>{
+        res.status(201).json({message:'Am creat cu success colaborarea!'})
+    }).catch((err)=>{
+        res.status(501).json({message:err.message})
+    })
+}
+exports.checkCollaboration = (req,res,next)=>{
+    Collaborations.findOne({where:{projectId:req.params.projectId,userId:req.params.userId}}).then((collaboration)=>{
+        if(collaboration){
+            if(collaboration.status==='NOK'){
+                res.status(200).json({checked:false,status:'Cererea de colaborare este in asteptare!'});
+            }else{
+                res.status(200).json({checked:true})
+            }
+        }else{
+            res.status(200).json({checked:false});
+        }
+    })
+}
 
 exports.getAllProjectsBySponsor = (req,res,next)=>{
 Themes.findAll({where:{sponsorId:req.params.id}}).then((themes)=>{

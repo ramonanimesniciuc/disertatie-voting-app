@@ -36,7 +36,8 @@ db.user_roles =require("../models/userrole.model")(sequelize, Sequelize);
 db.rewards_user= require("../models/rewarduser.model")(sequelize, Sequelize);
 db.rewards = require("../models/reward.model")(sequelize, Sequelize);
 db.themes = require("../models/themes.model")(sequelize,Sequelize);
-db.sponsors = require("./sponsor.model")(sequelize,Sequelize);
+db.sponsors = require("./sponsor.model")(sequelize,Sequelize)
+db.collaborations = require('./collaborations.model')(sequelize,Sequelize)
 
 db.role.belongsToMany(db.user, {
     through: "user_roles",
@@ -54,6 +55,11 @@ db.role.hasOne(db.sponsors);
 db.sponsors.hasMany(db.themes);
 db.sponsors.hasMany(db.rewards);
 db.themes.belongsTo(db.sponsors);
+db.user.hasMany(db.collaborations, {foreignKey: 'userId'})
+db.collaborations.belongsTo(db.user, {foreignKey: 'userId'})
+db.project.hasMany(db.collaborations,{foreignKey:'projectId'})
+db.collaborations.belongsTo(db.project,{foreignKey:'projectId'})
+
 db.rewards.belongsToMany(db.user, {
     through: {
         model: 'rewards_user',

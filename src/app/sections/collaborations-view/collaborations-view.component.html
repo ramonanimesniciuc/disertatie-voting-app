@@ -1,0 +1,9 @@
+<div class="card" *ngFor="let collaboration of collaborations">
+    <div class="card-header"># {{collaboration.id}}</div>
+    <div class="card-body">
+        {{collaboration.user.first_name}} {{collaboration.user.last_name}} doreste sa colaborareze la proiectul {{collaboration.project.title}}
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-outline-info" (click)="approveCollaboration(collaboration)">Aproba colaborarea</button>
+    </div>
+</div>

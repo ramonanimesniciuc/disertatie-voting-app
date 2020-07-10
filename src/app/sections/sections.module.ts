@@ -40,6 +40,7 @@ import {ChartsModule} from 'ng2-charts';
 import { RewardsComponent } from './rewards/rewards.component';
 import { AddVoucherComponent } from './add-voucher/add-voucher.component';
 import {SponsorsModule} from '../sponsors/sponsors.module';
+import { CollaborationsViewComponent } from './collaborations-view/collaborations-view.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {SponsorsModule} from '../sponsors/sponsors.module';
     HistoryComponent,
     NewsListComponent,
     RewardsComponent,
-    AddVoucherComponent
+    AddVoucherComponent,
+    CollaborationsViewComponent
   ],
   entryComponents: [NgbdModalContent],
     imports: [

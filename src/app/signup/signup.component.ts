@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit {
                     this.notificationsService.success('Te-ai inregistrat cu success!', '', {timeOut: 1500});
                 },
                 (err) => {
-                    this.notificationsService.error(err.message);
+                    this.notificationsService.error(err.message, '', {timeOut: 2000});
                 }
             );
         }
